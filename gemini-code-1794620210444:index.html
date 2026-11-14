@@ -1,0 +1,3628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Cloud Lounge School</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            turquoise: {
+              DEFAULT: '#40C4C6',
+              dark: '#32a3a5',
+              light: '#68d3d5',
+            },
+            charcoal: {
+              DEFAULT: '#242424',
+              deep: '#191919',
+              card: '#2c2c2c',
+              elevated: '#343434',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Base Palette & Scrollbar */
+    body {
+      background-color: #242424;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    /* Tablet & Touch Target Ergonomics */
+    button, select, input, textarea {
+      touch-action: manipulation;
+    }
+
+    /* Custom Scrollbar matching Charcoal & Turquoise */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #191919;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3a3a3a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #40C4C6;
+    }
+
+    /* Workstation Shake Animation */
+    @keyframes cocktailShake {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      15% { transform: translate(-8px, -6px) rotate(-9deg); }
+      30% { transform: translate(8px, 4px) rotate(9deg); }
+      45% { transform: translate(-7px, 5px) rotate(-7deg); }
+      60% { transform: translate(7px, -5px) rotate(7deg); }
+      75% { transform: translate(-4px, 3px) rotate(-4deg); }
+    }
+    .animate-shake-vessel {
+      animation: cocktailShake 0.65s ease-in-out;
+    }
+
+    /* Barspoon Stir Animation */
+    @keyframes spoonStir {
+      0% { transform: translateX(0px) rotate(0deg); }
+      25% { transform: translateX(14px) rotate(6deg); }
+      50% { transform: translateX(0px) rotate(0deg); }
+      75% { transform: translateX(-14px) rotate(-6deg); }
+      100% { transform: translateX(0px) rotate(0deg); }
+    }
+    .animate-stir-spoon {
+      transform-origin: 150px 40px;
+      animation: spoonStir 0.55s ease-in-out 2;
+    }
+
+    /* Smooth SVG Liquid Transitions */
+    .liquid-layer {
+      transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#242424] text-white selection:bg-[#40C4C6] selection:text-[#242424]">
+
+  <!-- ==================== TOP NAVIGATION HEADER ==================== -->
+  <header class="sticky top-0 z-30 bg-[#191919]/95 backdrop-blur-md border-b border-white/10 shadow-lg">
+    <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+      
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center justify-between sm:justify-start gap-3">
+        <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+          <div class="h-10 sm:h-12 px-2.5 sm:px-3.5 rounded-xl bg-[#242424] border border-[#40C4C6]/40 flex items-center justify-center shadow-inner overflow-hidden shrink-0">
+            <img
+              src="https://share.google/C7wMYqqw5i0w5dRMY"
+              alt="The Cloud One Logo"
+              class="h-7 sm:h-8 w-auto object-contain"
+              onerror="this.style.display='none'; document.getElementById('header-logo-fallback').classList.remove('hidden');"
+            />
+            <!-- Vector Fallback Emblem -->
+            <div id="header-logo-fallback" class="hidden flex items-center gap-2">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7 text-[#40C4C6]" viewBox="0 0 36 36" fill="none">
+                <path d="M9 25H26.5C29.5376 25 32 22.5376 32 19.5C32 16.6524 29.8357 14.3106 27.0588 14.0283C26.1536 9.99993 22.5567 7 18.25 7C13.6815 7 9.91455 10.3822 9.3304 14.7779C6.88565 15.3941 5 17.6068 5 20.25C5 22.8734 6.79086 25 9 25Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="18.5" cy="17.5" r="2.5" fill="#40C4C6"/>
+              </svg>
+              <div class="leading-none">
+                <span class="block text-[9px] sm:text-[10px] tracking-[0.22em] font-bold text-[#40C4C6] uppercase">THE CLOUD ONE</span>
+                <span class="block text-[8px] sm:text-[9px] tracking-[0.16em] text-white/70 uppercase mt-0.5">LOUNGE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="min-w-0">
+            <h1 class="text-base sm:text-lg md:text-xl font-extrabold tracking-tight text-white truncate">
+              The Cloud Lounge School
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls: Mode Toggle & Bartender's Codex -->
+      <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 md:gap-3 w-full sm:w-auto">
+        <!-- Mode Switcher (Memory vs Study) -->
+        <button
+          id="btn-mode-toggle"
+          onclick="toggleGameMode()"
+          class="min-h-[44px] px-3 sm:px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border border-white/15 bg-[#2c2c2c] active:scale-95 hover:border-[#40C4C6] text-white transition flex items-center justify-center gap-1.5 sm:gap-2"
+          title="Switch between 9s Memory Challenge and Always-Visible Study Mode"
+        >
+          <span id="mode-indicator-dot" class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#40C4C6] shrink-0"></span>
+          <span id="mode-label" class="truncate">Memory Mode (9s)</span>
+        </button>
+
+        <!-- Bartender's Codex Button -->
+        <button
+          onclick="openCodexModal()"
+          class="min-h-[44px] px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold bg-[#40C4C6] active:scale-95 hover:bg-[#32a3a5] text-[#242424] shadow-md transition flex items-center justify-center gap-2"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span>Bartender's Codex</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== TOAST / NOTIFICATION BANNER ==================== -->
+  <div id="toast-container" class="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-5 sm:bottom-5 z-50 flex flex-col items-center sm:items-end gap-2 pointer-events-none"></div>
+
+  <!-- ==================== MAIN WORKSTATION CONTAINER (PHONE, TABLET & DESKTOP ADAPTIVE) ==================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6">
+
+    <!-- LEFT COLUMN (Full width on phone, 5 cols on tablet/desktop): Order Ticket, Recipe Memory Card & Live SVG Glass -->
+    <section class="md:col-span-5 flex flex-col gap-3.5 sm:gap-4 md:gap-5">
+
+      <!-- Target Order & Memory Card -->
+      <div class="bg-[#191919] border border-white/10 rounded-2xl p-3.5 sm:p-4 md:p-5 shadow-xl">
+        <div class="flex items-start justify-between gap-2.5 sm:gap-3">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#40C4C6]">Current Order</span>
+              <select
+                id="practice-folder-filter"
+                onchange="setPracticeFolderFilter(this.value)"
+                class="px-2.5 py-1 rounded-lg bg-[#242424] border border-white/15 text-[11px] font-bold text-white/85 focus:outline-none focus:border-[#40C4C6]"
+                title="Filter practice drinks by Codex folder"
+              >
+                <option value="all">All Folders</option>
+                <option value="signature">Signature Cocktails</option>
+                <option value="classic">Cocktails</option>
+                <option value="mocktails">Mocktails</option>
+                <option value="aperitif">Apéritif</option>
+              </select>
+            </div>
+            <h2 id="target-drink-name" class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mt-1.5 tracking-tight break-words">Loading...</h2>
+          </div>
+
+          <button
+            onclick="skipToNextOrder()"
+            class="min-h-[42px] px-3 sm:px-3.5 py-2 rounded-xl text-xs font-bold bg-[#242424] active:scale-95 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition shrink-0"
+            title="Skip to another cocktail"
+          >
+            Skip &rarr;
+          </button>
+        </div>
+
+        <!-- Memory Countdown / Peek Bar -->
+        <div class="mt-4 pt-3.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+          <div id="memory-timer-text" class="text-xs font-semibold text-white/80 flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-[#40C4C6] animate-ping"></span>
+            <span>Memorize recipe: <strong id="countdown-seconds">9</strong>s remaining</span>
+          </div>
+          <button
+            id="btn-peek-recipe"
+            onclick="togglePeekRecipe()"
+            class="hidden min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#40C4C6]/20 hover:bg-[#40C4C6]/30 text-[#40C4C6] border border-[#40C4C6]/40 transition"
+          >
+            Peek Recipe
+          </button>
+        </div>
+
+        <!-- Recipe Specification Card (Visible during study/peek) -->
+        <div id="recipe-spec-card" class="mt-3.5 bg-[#242424] border border-white/10 rounded-xl p-3.5 space-y-3">
+          <div id="spec-photo-wrapper" class="hidden">
+            <div
+              onclick="openFullscreenPhoto(document.getElementById('spec-photo-img').src, document.getElementById('target-drink-name').textContent)"
+              class="relative group cursor-zoom-in rounded-xl overflow-hidden border border-white/15 h-36 bg-[#191919]"
+            >
+              <img id="spec-photo-img" src="" alt="Cocktail Reference" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+              <span class="absolute bottom-2 right-2 px-2 py-1 rounded-lg bg-black/75 backdrop-blur-sm text-[10px] font-bold text-white border border-white/15 flex items-center gap-1 pointer-events-none">
+                <span>Tap Fullscreen</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div class="bg-[#191919] p-2 rounded-lg border border-white/5">
+              <span class="block text-[10px] uppercase tracking-wider text-white/50">Glass</span>
+              <span id="spec-glass" class="block text-xs font-bold text-white mt-0.5 truncate">-</span>
+            </div>
+            <div class="bg-[#191919] p-2 rounded-lg border border-white/5">
+              <span class="block text-[10px] uppercase tracking-wider text-white/50">Ice</span>
+              <span id="spec-ice" class="block text-xs font-bold text-white mt-0.5 truncate">-</span>
+            </div>
+            <div class="bg-[#191919] p-2 rounded-lg border border-white/5">
+              <span class="block text-[10px] uppercase tracking-wider text-white/50">Technique</span>
+              <span id="spec-technique" class="block text-xs font-bold text-[#40C4C6] mt-0.5 truncate">-</span>
+            </div>
+          </div>
+
+          <div>
+            <span class="block text-[10px] uppercase tracking-wider text-white/50 mb-1.5">Ingredients &amp; Proportions</span>
+            <ul id="spec-ingredients" class="space-y-1 text-xs"></ul>
+          </div>
+
+          <div class="text-xs bg-[#191919] px-3 py-2 rounded-lg border border-white/5">
+            <span class="text-white/50 font-semibold">Garnish:</span>
+            <span id="spec-garnishes" class="text-white font-bold ml-1">-</span>
+          </div>
+
+          <p id="spec-instructions" class="text-[11px] text-white/65 leading-relaxed bg-[#191919] p-2.5 rounded-lg border border-white/5"></p>
+        </div>
+
+        <!-- Locked Recipe Placeholder (During Memory Challenge) -->
+        <div id="recipe-locked-card" class="hidden mt-3.5 bg-[#242424] border border-dashed border-white/20 rounded-xl p-5 text-center space-y-1.5">
+          <div class="text-xl">&#129504;</div>
+          <p class="text-xs font-bold text-white">Recipe Hidden — Mix From Memory!</p>
+          <p class="text-[11px] text-white/55">Select the correct glass, ice, ingredients, technique &amp; garnish.</p>
+        </div>
+      </div>
+
+      <!-- Live SVG Glass & Current Pours Card -->
+      <div class="bg-[#191919] border border-white/10 rounded-2xl p-3.5 sm:p-4 md:p-5 shadow-xl flex-1 flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-white/70">Live Vessel Preview</span>
+          <span id="live-volume-badge" class="px-2.5 py-1 rounded-full text-xs font-bold bg-[#242424] text-[#40C4C6] border border-[#40C4C6]/30">
+            0.0 cl poured
+          </span>
+        </div>
+
+        <!-- SVG Stage -->
+        <div class="my-1.5 sm:my-2 flex items-center justify-center">
+          <svg id="cocktail-svg" viewBox="0 0 300 300" class="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 overflow-visible">
+            <defs>
+              <clipPath id="clip-rocks">
+                <path d="M82 95 L218 95 L204 252 Q203 262 193 262 L107 262 Q97 262 96 252 Z" />
+              </clipPath>
+              <clipPath id="clip-highball">
+                <path d="M98 55 L202 55 L194 265 Q193 274 184 274 L116 274 Q107 274 106 265 Z" />
+              </clipPath>
+              <clipPath id="clip-coupe">
+                <path d="M62 85 Q62 162 150 162 Q238 162 238 85 Z" />
+              </clipPath>
+              <clipPath id="clip-hurricane">
+                <path d="M102 55 C86 95, 84 140, 108 175 C124 198, 122 222, 108 242 L192 242 C178 222, 176 198, 192 175 C216 140, 214 95, 198 55 Z" />
+              </clipPath>
+              <clipPath id="clip-red_wine">
+                <path d="M96 58 C84 108, 84 176, 150 176 C216 176, 216 108, 204 58 Z" />
+              </clipPath>
+              <clipPath id="clip-white_wine">
+                <path d="M106 64 C98 108, 100 166, 150 166 C200 166, 202 108, 194 64 Z" />
+              </clipPath>
+              <clipPath id="clip-flute">
+                <path d="M124 44 L176 44 L170 168 Q169 178 150 178 Q131 178 130 168 Z" />
+              </clipPath>
+              <clipPath id="clip-mule">
+                <path d="M94 82 L206 82 L202 246 Q201 258 188 258 L112 258 Q99 258 98 246 Z" />
+              </clipPath>
+              <clipPath id="clip-tiki">
+                <path d="M98 62 L202 62 L196 256 Q195 266 184 266 L116 266 Q105 266 104 256 Z" />
+              </clipPath>
+            </defs>
+
+            <!-- Clipped Liquid & Ice Group -->
+            <g id="svg-glass-contents" clip-path="url(#clip-rocks)">
+              <g id="svg-liquid-layers"></g>
+              <g id="svg-ice-layer"></g>
+            </g>
+
+            <!-- Glass Outline -->
+            <g id="svg-glass-outline"></g>
+
+            <!-- Garnish Layer -->
+            <g id="svg-garnish-layer"></g>
+
+            <!-- Animated Barspoon -->
+            <g id="svg-barspoon" class="hidden">
+              <line x1="150" y1="18" x2="150" y2="210" stroke="#40C4C6" stroke-width="4" stroke-linecap="round" />
+              <ellipse cx="150" cy="212" rx="10" ry="5" fill="#40C4C6" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Poured Ingredients Pills & Undo/Empty Controls -->
+        <div class="space-y-3 pt-3 border-t border-white/10">
+          <div id="current-pours-list" class="flex flex-wrap gap-1.5 min-h-[28px]">
+            <span class="text-xs text-white/40 italic">Glass is currently empty</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              onclick="undoLastPour()"
+              class="flex-1 min-h-[42px] px-3 py-2 rounded-xl text-xs font-bold bg-[#242424] active:scale-95 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition"
+            >
+              &#8617; Undo Last Pour
+            </button>
+            <button
+              onclick="resetCurrentBuild(false)"
+              class="flex-1 min-h-[42px] px-3 py-2 rounded-xl text-xs font-bold bg-[#242424] active:scale-95 hover:bg-red-500/20 text-white/80 hover:text-red-300 border border-white/10 transition"
+            >
+              Empty Glass
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN (Full width on phone, 7 cols on tablet/desktop): 5-Step Bartending Workstation -->
+    <section id="workstation-panel-card" class="md:col-span-7 bg-[#191919] border border-white/10 rounded-2xl p-3.5 sm:p-4 md:p-6 shadow-xl flex flex-col justify-between gap-4 sm:gap-5">
+      <div>
+        <!-- 5-Step Tabs -->
+        <div class="grid grid-cols-5 gap-1 sm:gap-2 pb-3 sm:pb-4 border-b border-white/10">
+          <button id="step-tab-1" onclick="setActiveStep(1)" class="step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#40C4C6] text-[#242424]">
+            <span class="text-[9px] sm:text-[10px] opacity-75">Step 1</span>
+            <span>Glass</span>
+          </button>
+          <button id="step-tab-2" onclick="setActiveStep(2)" class="step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#242424] text-white/75">
+            <span class="text-[9px] sm:text-[10px] opacity-75">Step 2</span>
+            <span>Ice</span>
+          </button>
+          <button id="step-tab-3" onclick="setActiveStep(3)" class="step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#242424] text-white/75">
+            <span class="text-[9px] sm:text-[10px] opacity-75">Step 3</span>
+            <span>Pour</span>
+          </button>
+          <button id="step-tab-4" onclick="setActiveStep(4)" class="step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#242424] text-white/75">
+            <span class="text-[9px] sm:text-[10px] opacity-75">Step 4</span>
+            <span class="truncate max-w-full">Tech</span>
+          </button>
+          <button id="step-tab-5" onclick="setActiveStep(5)" class="step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#242424] text-white/75">
+            <span class="text-[9px] sm:text-[10px] opacity-75">Step 5</span>
+            <span>Garnish</span>
+          </button>
+        </div>
+
+        <!-- STEP 1: GLASSWARE -->
+        <div id="step-panel-1" class="pt-4 space-y-3">
+          <div>
+            <h3 class="text-base md:text-lg font-extrabold text-white">1. Choose Glassware</h3>
+            <p class="text-xs text-white/60">Select the proper serving vessel for this cocktail.</p>
+          </div>
+          <div id="glassware-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- STEP 2: ICE TYPE -->
+        <div id="step-panel-2" class="hidden pt-4 space-y-3">
+          <div>
+            <h3 class="text-base md:text-lg font-extrabold text-white">2. Choose Ice Type</h3>
+            <p class="text-xs text-white/60">Select whether the drink is served up or over cubed/crushed ice.</p>
+          </div>
+          <div id="ice-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+        </div>
+
+        <!-- STEP 3: INGREDIENTS & JIGGER -->
+        <div id="step-panel-3" class="hidden pt-4 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h3 class="text-base md:text-lg font-extrabold text-white">3. Pour Ingredients</h3>
+              <p class="text-xs text-white/60">Choose a jigger volume (cl) and tap bottles to pour.</p>
+            </div>
+            <button
+              id="btn-pour-mode"
+              onclick="togglePourMode()"
+              class="min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-bold bg-[#242424] hover:border-[#40C4C6] text-[#40C4C6] border border-[#40C4C6]/40 transition"
+            >
+              Mode: Manual Jigger (cl)
+            </button>
+          </div>
+
+          <!-- Jigger Selector -->
+          <div id="jigger-selector-bar" class="bg-[#242424] border border-white/10 rounded-xl p-3 space-y-2">
+            <span class="block text-[11px] font-bold uppercase tracking-wider text-white/55">Jigger Increment (cl)</span>
+            <div id="jigger-buttons" class="flex flex-wrap gap-1.5"></div>
+          </div>
+
+          <!-- Category Tabs -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 sm:gap-2">
+            <button id="cat-tab-Spirits" onclick="setIngredientCategory('Spirits')" class="ing-cat-tab min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#40C4C6] text-[#242424] transition truncate">Spirits</button>
+            <button id="cat-tab-Liquors" onclick="setIngredientCategory('Liquors')" class="ing-cat-tab min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/75 hover:text-white transition truncate">Liquors</button>
+            <button id="cat-tab-Syrups" onclick="setIngredientCategory('Syrups')" class="ing-cat-tab min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/75 hover:text-white transition truncate">Syrups</button>
+            <button id="cat-tab-Juices/Soda" onclick="setIngredientCategory('Juices/Soda')" class="ing-cat-tab min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/75 hover:text-white transition truncate">Juices/Soda</button>
+            <button id="cat-tab-Specials" onclick="setIngredientCategory('Specials')" class="ing-cat-tab col-span-2 sm:col-span-1 min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/75 hover:text-white transition truncate">Specials</button>
+          </div>
+
+          <!-- Bottles Grid -->
+          <div id="ingredients-grid" class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 max-h-[320px] sm:max-h-[340px] overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- STEP 4: TECHNIQUE -->
+        <div id="step-panel-4" class="hidden pt-4 space-y-3">
+          <div>
+            <h3 class="text-base md:text-lg font-extrabold text-white">4. Preparation Technique</h3>
+            <p class="text-xs text-white/60">Build, shake, double strain, or stir your cocktail.</p>
+          </div>
+          <div id="technique-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- STEP 5: GARNISH -->
+        <div id="step-panel-5" class="hidden pt-4 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <h3 class="text-base md:text-lg font-extrabold text-white">5. Select Garnish(es)</h3>
+              <p class="text-xs text-white/60">Toggle one or more garnishes to finish the presentation.</p>
+            </div>
+            <span id="selected-garnish-count" class="px-3 py-1 rounded-full text-xs font-bold bg-[#242424] text-[#40C4C6] border border-[#40C4C6]/30 shrink-0">
+              0 selected
+            </span>
+          </div>
+          <div id="garnishes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5"></div>
+        </div>
+      </div>
+
+      <!-- Workstation Footer: Prev / Next Step & Serve Button -->
+      <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
+        <div class="grid grid-cols-2 sm:flex items-center gap-2">
+          <button
+            id="btn-prev-step"
+            onclick="changeStep(-1)"
+            disabled
+            class="min-h-[46px] px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/85 hover:text-white border border-white/10 disabled:opacity-35 transition"
+          >
+            &larr; Prev
+          </button>
+          <button
+            id="btn-next-step"
+            onclick="changeStep(1)"
+            class="min-h-[46px] px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/85 hover:text-white border border-white/10 disabled:opacity-35 transition"
+          >
+            Next &rarr;
+          </button>
+        </div>
+
+        <button
+          onclick="serveCocktail()"
+          class="min-h-[48px] px-6 py-2.5 rounded-xl text-sm font-extrabold bg-[#40C4C6] active:scale-95 hover:bg-[#32a3a5] text-[#242424] shadow-lg transition flex items-center justify-center gap-2"
+        >
+          <span>Serve Cocktail</span>
+          <span>&#10003;</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== EVALUATION RESULT MODAL ==================== -->
+  <div id="eval-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#191919] border border-[#40C4C6]/40 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <span id="eval-badge" class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-[#40C4C6]/20 text-[#40C4C6] uppercase tracking-wider">Result</span>
+          <h3 id="eval-title" class="text-xl font-extrabold text-white mt-1">Cocktail Name</h3>
+        </div>
+        <div class="text-right">
+          <span id="eval-score-percent" class="text-3xl font-extrabold text-[#40C4C6]">100%</span>
+          <span class="block text-[10px] uppercase tracking-wider text-white/50">Accuracy</span>
+        </div>
+      </div>
+
+      <div id="eval-breakdown" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
+
+      <div class="bg-[#242424] border border-white/10 rounded-xl p-3">
+        <span class="block text-[10px] uppercase tracking-wider font-bold text-[#40C4C6] mb-1">Standard Preparation</span>
+        <p id="eval-instructions" class="text-xs text-white/75 leading-relaxed"></p>
+      </div>
+
+      <div class="flex items-center gap-2.5 pt-2">
+        <button
+          onclick="retryCurrentOrder()"
+          class="flex-1 min-h-[44px] py-2.5 rounded-xl text-xs font-bold bg-[#242424] hover:bg-white/10 text-white border border-white/15 transition"
+        >
+          Retry Drink
+        </button>
+        <button
+          onclick="closeEvalAndNextOrder()"
+          class="flex-1 min-h-[44px] py-2.5 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+        >
+          Next Order &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== BARTENDER'S CODEX MODAL ==================== -->
+  <div id="codex-modal" class="fixed inset-0 z-40 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-0 sm:p-4 md:p-5">
+    <div class="bg-[#242424] border-0 sm:border border-white/15 rounded-none sm:rounded-2xl max-w-6xl w-full h-[100dvh] sm:h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+      <!-- Codex Top Header -->
+      <div class="px-3.5 sm:px-5 py-3 sm:py-4 bg-[#191919] border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#40C4C6]/15 border border-[#40C4C6]/40 flex items-center justify-center text-[#40C4C6] shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h2 class="text-base sm:text-lg font-extrabold text-white truncate">Bartender's Codex</h2>
+              <p class="text-[11px] sm:text-xs text-white/55 truncate">Official Recipe Book, Ingredients &amp; Garnish Standards</p>
+            </div>
+          </div>
+
+          <button
+            onclick="closeCodexModal()"
+            class="sm:hidden min-w-[42px] min-h-[42px] p-2 rounded-xl bg-[#242424] active:scale-95 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition flex items-center justify-center shrink-0"
+            title="Close Codex"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-1.5 sm:gap-2">
+          <!-- Export & Import Backup Buttons (Always Accessible in Codex Header) -->
+          <button
+            onclick="exportBarDataBackup()"
+            class="min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-3.5 py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-bold bg-[#191919] active:scale-95 hover:border-[#40C4C6] text-white/90 hover:text-white border border-white/15 transition flex items-center justify-center gap-1.5"
+            title="Download full bar recipes, ingredients, garnishes & photos as JSON"
+          >
+            <svg class="w-4 h-4 text-[#40C4C6] shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
+            </svg>
+            <span class="truncate">Export</span>
+          </button>
+
+          <button
+            onclick="triggerImportBackup()"
+            class="min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-3.5 py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-bold bg-[#191919] active:scale-95 hover:border-[#40C4C6] text-white/90 hover:text-white border border-white/15 transition flex items-center justify-center gap-1.5"
+            title="Restore recipes, ingredients, garnishes & photos from a JSON backup file"
+          >
+            <svg class="w-4 h-4 text-[#40C4C6] shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M17 9l-5-5m0 0L7 9m5-5v12" />
+            </svg>
+            <span class="truncate">Import</span>
+          </button>
+          <input id="codex-import-file-input" type="file" accept=".json,application/json" onchange="importBarDataBackup(event)" class="hidden" />
+
+          <!-- Admin Lock / Unlock Toggle -->
+          <button
+            id="btn-admin-status"
+            onclick="handleAdminToggle()"
+            class="min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-bold border transition flex items-center justify-center gap-1.5 sm:gap-2 bg-[#191919] border-white/15 text-white/80 hover:border-[#40C4C6]"
+          >
+            <span id="admin-lock-icon">&#128274;</span>
+            <span id="admin-status-text" class="truncate">Admin</span>
+          </button>
+
+          <button
+            onclick="closeCodexModal()"
+            class="hidden sm:flex min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-[#191919] active:scale-95 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition items-center justify-center"
+            title="Close Codex"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Codex Navigation Tabs -->
+      <div class="px-3.5 sm:px-5 pt-2.5 sm:pt-3 bg-[#191919] border-b border-white/10 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+        <div class="grid grid-cols-3 sm:flex gap-1.5 sm:gap-2 w-full sm:w-auto">
+          <button
+            onclick="setCodexTab('recipes')"
+            id="codex-tab-recipes"
+            class="min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-t-xl text-[11px] sm:text-xs md:text-sm font-bold border-b-2 border-[#40C4C6] text-[#40C4C6] bg-[#242424] truncate"
+          >
+            Recipes (9)
+          </button>
+          <button
+            onclick="setCodexTab('ingredients')"
+            id="codex-tab-ingredients"
+            class="min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-t-xl text-[11px] sm:text-xs md:text-sm font-bold border-b-2 border-transparent text-white/65 hover:text-white truncate"
+          >
+            Ingredients
+          </button>
+          <button
+            onclick="setCodexTab('garnishes')"
+            id="codex-tab-garnishes"
+            class="min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-t-xl text-[11px] sm:text-xs md:text-sm font-bold border-b-2 border-transparent text-white/65 hover:text-white truncate"
+          >
+            Garnishes
+          </button>
+        </div>
+
+        <!-- Admin Recipe Toolbar (Visible when Admin is Unlocked on Recipes Tab) -->
+        <div id="codex-admin-recipe-actions" class="hidden pb-2 flex items-center gap-2 w-full sm:w-auto">
+          <button
+            onclick="openAddRecipeModal()"
+            class="w-full sm:w-auto min-h-[42px] px-4 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] active:scale-95 hover:bg-[#32a3a5] text-[#242424] transition text-center"
+          >
+            + Add Recipe
+          </button>
+        </div>
+      </div>
+
+      <!-- Codex Live Search Window -->
+      <div class="px-3.5 sm:px-5 py-2.5 sm:py-3 bg-[#1d1d1d] border-b border-white/10">
+        <div class="relative flex items-center">
+          <svg class="w-4 h-4 text-[#40C4C6] absolute left-3.5 pointer-events-none shrink-0" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 10.5a7.5 7.5 0 0013.15 6.15z" />
+          </svg>
+          <input
+            id="codex-search-input"
+            type="text"
+            oninput="handleCodexSearch(this.value)"
+            onkeydown="if(event.key==='Escape'){ clearCodexSearch(); event.stopPropagation(); }"
+            placeholder="Search recipes by name, ingredient, glass, technique, or garnish..."
+            class="w-full min-h-[42px] pl-10 pr-24 py-2 rounded-xl bg-[#191919] border border-white/15 text-xs sm:text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-[#40C4C6] transition"
+          />
+          <div class="absolute right-2.5 flex items-center gap-1.5">
+            <span id="codex-search-count" class="hidden px-2 py-0.5 rounded-md bg-[#40C4C6]/15 text-[#40C4C6] text-[10px] sm:text-[11px] font-extrabold"></span>
+            <button
+              id="btn-clear-codex-search"
+              type="button"
+              onclick="clearCodexSearch()"
+              class="hidden min-w-[30px] min-h-[30px] rounded-lg bg-[#2c2c2c] hover:bg-white/15 text-white/75 hover:text-white text-xs font-bold flex items-center justify-center transition"
+              title="Clear search"
+            >
+              &#10005;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Codex Scrollable Body -->
+      <div class="p-3.5 sm:p-5 overflow-y-auto flex-1 bg-[#242424]">
+        <!-- TAB 1: RECIPES -->
+        <div id="codex-panel-recipes" class="space-y-4">
+          <!-- Folder Selector (Hidden while searching across all folders) -->
+          <div id="codex-folders-bar" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <button
+              id="folder-btn-signature"
+              onclick="setCodexFolder('signature')"
+              class="p-3.5 rounded-2xl border text-left transition flex items-center justify-between gap-2.5 bg-[#191919] border-[#40C4C6] text-white"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div id="folder-icon-signature" class="w-9 h-9 rounded-xl bg-[#40C4C6]/20 text-[#40C4C6] flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <span class="block text-xs sm:text-sm font-extrabold text-white truncate">Signature Cocktails</span>
+                  <span class="block text-[10px] sm:text-[11px] text-white/60 truncate">House Originals &amp; Specials</span>
+                </div>
+              </div>
+              <span id="folder-count-signature" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#191919] text-[#40C4C6] border border-[#40C4C6]/40 shrink-0">9</span>
+            </button>
+
+            <button
+              id="folder-btn-classic"
+              onclick="setCodexFolder('classic')"
+              class="p-3.5 rounded-2xl border text-left transition flex items-center justify-between gap-2.5 bg-[#191919] border-white/10 text-white/75 hover:border-white/30"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div id="folder-icon-classic" class="w-9 h-9 rounded-xl bg-[#242424] text-white/70 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <span class="block text-xs sm:text-sm font-extrabold text-white truncate">Cocktails</span>
+                  <span class="block text-[10px] sm:text-[11px] text-white/60 truncate">Classic &amp; Modern Standards</span>
+                </div>
+              </div>
+              <span id="folder-count-classic" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#242424] text-white/70 border border-white/10 shrink-0">0</span>
+            </button>
+
+            <button
+              id="folder-btn-mocktails"
+              onclick="setCodexFolder('mocktails')"
+              class="p-3.5 rounded-2xl border text-left transition flex items-center justify-between gap-2.5 bg-[#191919] border-white/10 text-white/75 hover:border-white/30"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div id="folder-icon-mocktails" class="w-9 h-9 rounded-xl bg-[#242424] text-white/70 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <span class="block text-xs sm:text-sm font-extrabold text-white truncate">Mocktails</span>
+                  <span class="block text-[10px] sm:text-[11px] text-white/60 truncate">Zero-Proof Creations</span>
+                </div>
+              </div>
+              <span id="folder-count-mocktails" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#242424] text-white/70 border border-white/10 shrink-0">0</span>
+            </button>
+
+            <button
+              id="folder-btn-aperitif"
+              onclick="setCodexFolder('aperitif')"
+              class="p-3.5 rounded-2xl border text-left transition flex items-center justify-between gap-2.5 bg-[#191919] border-white/10 text-white/75 hover:border-white/30"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div id="folder-icon-aperitif" class="w-9 h-9 rounded-xl bg-[#242424] text-white/70 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <span class="block text-xs sm:text-sm font-extrabold text-white truncate">Apéritif</span>
+                  <span class="block text-[10px] sm:text-[11px] text-white/60 truncate">Pre-Dinner &amp; Sparkling</span>
+                </div>
+              </div>
+              <span id="folder-count-aperitif" class="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#242424] text-white/70 border border-white/10 shrink-0">0</span>
+            </button>
+          </div>
+
+          <!-- Active Cross-Folder Search Banner -->
+          <div id="codex-search-banner" class="hidden bg-[#191919] border border-[#40C4C6]/40 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2">
+            <span id="codex-search-banner-text" class="text-xs font-bold text-white/85">Searching across all folders</span>
+            <button
+              type="button"
+              onclick="clearCodexSearch()"
+              class="text-xs font-extrabold text-[#40C4C6] hover:underline shrink-0"
+            >
+              Reset Search
+            </button>
+          </div>
+
+          <!-- Recipes Grid inside Selected Folder -->
+          <div id="codex-recipes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+
+        <!-- TAB 2: MANAGE INGREDIENTS (Admin PIN Protected) -->
+        <div id="codex-panel-ingredients" class="hidden space-y-5">
+          <!-- Locked Notice Banner when Admin is locked -->
+          <div id="ingredients-locked-banner" class="bg-[#191919] border border-[#40C4C6]/40 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">&#128274;</span>
+              <div>
+                <h4 class="text-sm font-extrabold text-white">Admin Authorization Required</h4>
+                <p class="text-xs text-white/60">Unlock Admin Mode with the Barchef PIN to add, rename, or delete ingredients.</p>
+              </div>
+            </div>
+            <button
+              onclick="promptAdminPin(() => renderCodexIngredients())"
+              class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+            >
+              Unlock Admin
+            </button>
+          </div>
+
+          <!-- Ingredients Manager -->
+          <div id="ingredients-admin-content" class="space-y-5">
+            <!-- Add New Ingredient Form -->
+            <div id="add-ingredient-card" class="bg-[#191919] border border-white/10 rounded-2xl p-4">
+              <h4 class="text-sm font-bold text-[#40C4C6] mb-3">+ Add New Ingredient</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end">
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] text-white/60 mb-1">Ingredient Name</label>
+                  <input
+                    id="new-ing-name"
+                    type="text"
+                    placeholder="e.g. Mozart Dark Chocolate"
+                    class="w-full px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"
+                  />
+                </div>
+                <div>
+                  <label class="block text-[11px] text-white/60 mb-1">Category</label>
+                  <select
+                    id="new-ing-category"
+                    class="w-full px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"
+                  >
+                    <option value="Spirits">Spirits</option>
+                    <option value="Liquors">Liquors</option>
+                    <option value="Syrups">Syrups</option>
+                    <option value="Juices/Soda">Juices/Soda</option>
+                    <option value="Specials">Specials</option>
+                  </select>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div>
+                    <label class="block text-[11px] text-white/60 mb-1">Color</label>
+                    <input
+                      id="new-ing-color"
+                      type="color"
+                      value="#40C4C6"
+                      class="h-9 w-12 rounded-lg bg-[#242424] border border-white/15 cursor-pointer"
+                    />
+                  </div>
+                  <button
+                    onclick="addNewIngredient()"
+                    class="flex-1 h-9 px-4 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Existing Ingredients List -->
+            <div class="bg-[#191919] border border-white/10 rounded-2xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-sm font-bold text-white">Catalog Ingredients (<span id="ing-total-count">0</span>)</h4>
+                <span id="ing-edit-hint" class="text-xs text-white/50">Edit name/category and click Save</span>
+              </div>
+              <div id="admin-ingredients-list" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: MANAGE GARNISHES (Admin PIN Protected) -->
+        <div id="codex-panel-garnishes" class="hidden space-y-5">
+          <!-- Locked Notice Banner when Admin is locked -->
+          <div id="garnishes-locked-banner" class="bg-[#191919] border border-[#40C4C6]/40 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">&#128274;</span>
+              <div>
+                <h4 class="text-sm font-extrabold text-white">Admin Authorization Required</h4>
+                <p class="text-xs text-white/60">Unlock Admin Mode with the Barchef PIN to add, edit, or delete garnishes.</p>
+              </div>
+            </div>
+            <button
+              onclick="promptAdminPin(() => renderCodexGarnishes())"
+              class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+            >
+              Unlock Admin
+            </button>
+          </div>
+
+          <!-- Garnishes Manager -->
+          <div id="garnishes-admin-content" class="space-y-5">
+            <!-- Add New Garnish -->
+            <div id="add-garnish-card" class="bg-[#191919] border border-white/10 rounded-2xl p-4">
+              <h4 class="text-sm font-bold text-[#40C4C6] mb-3">+ Add New Garnish</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end">
+                <div>
+                  <label class="block text-[11px] text-white/60 mb-1">Emoji Icon</label>
+                  <input
+                    id="new-garnish-emoji"
+                    type="text"
+                    value="🍋"
+                    maxlength="4"
+                    class="w-full px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white text-center focus:outline-none focus:border-[#40C4C6]"
+                  />
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="block text-[11px] text-white/60 mb-1">Garnish Name</label>
+                  <input
+                    id="new-garnish-name"
+                    type="text"
+                    placeholder="e.g. Dehydrated Blood Orange"
+                    class="w-full px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"
+                  />
+                </div>
+                <button
+                  onclick="addNewGarnish()"
+                  class="h-9 px-4 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+                >
+                  Add Garnish
+                </button>
+              </div>
+            </div>
+
+            <!-- Existing Garnishes List -->
+            <div class="bg-[#191919] border border-white/10 rounded-2xl p-4">
+              <h4 class="text-sm font-bold text-white mb-3">Available Garnishes (<span id="gar-total-count">0</span>)</h4>
+              <div id="admin-garnishes-list" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== AUTHORIZATION MODAL (For Recipe Editing Only) ==================== -->
+  <div id="pin-modal" class="fixed inset-0 z-[60] hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#191919] border border-[#40C4C6]/40 rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4">
+      <div class="w-12 h-12 rounded-2xl bg-[#40C4C6]/15 text-[#40C4C6] flex items-center justify-center mx-auto text-xl font-bold">
+        &#128272;
+      </div>
+      <div>
+        <h3 class="text-lg font-extrabold text-white">Barchef Authorization</h3>
+        <p class="text-xs text-white/60 mt-1">Enter Barchef PIN to unlock recipe editing.</p>
+      </div>
+      <input
+        id="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="••••"
+        onkeydown="if(event.key==='Enter') verifyAdminPin()"
+        class="w-full text-center tracking-[0.5em] text-xl font-bold px-4 py-3 rounded-xl bg-[#242424] border border-white/20 text-white focus:outline-none focus:border-[#40C4C6]"
+      />
+      <p id="pin-error-msg" class="hidden text-xs text-red-400 font-semibold">Incorrect PIN. Please try again.</p>
+      <div class="flex items-center gap-2 pt-1">
+        <button
+          onclick="closePinModal()"
+          class="flex-1 py-2.5 rounded-xl text-xs font-bold bg-[#2c2c2c] text-white/80 hover:text-white transition"
+        >
+          Cancel
+        </button>
+        <button
+          onclick="verifyAdminPin()"
+          class="flex-1 py-2.5 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+        >
+          Unlock
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== RECIPE EDITOR MODAL (PIN PROTECTED) ==================== -->
+  <div id="recipe-editor-modal" class="fixed inset-0 z-[60] hidden bg-black/85 backdrop-blur-sm flex items-start sm:items-center justify-center p-0 sm:p-4">
+    <div id="recipe-editor-scroll-box" class="bg-[#191919] border-0 sm:border border-[#40C4C6]/40 rounded-none sm:rounded-2xl max-w-2xl w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+      <!-- Sticky Editor Header -->
+      <div class="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#191919] border-b border-white/10 flex items-center justify-between gap-3 shrink-0">
+        <h3 id="editor-modal-title" class="text-base sm:text-lg font-extrabold text-white truncate">Edit Recipe</h3>
+        <button
+          type="button"
+          onclick="closeRecipeEditor()"
+          class="min-w-[40px] min-h-[40px] p-2 rounded-xl bg-[#242424] hover:bg-white/10 text-white/75 hover:text-white transition flex items-center justify-center shrink-0"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable Editor Body -->
+      <div id="recipe-editor-body" class="p-4 sm:p-6 overflow-y-auto flex-1 space-y-4">
+        <!-- Cocktail Name & Folder -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-white/70 mb-1">Cocktail Name</label>
+            <input
+              id="edit-drink-name"
+              type="text"
+              placeholder="e.g. Alpine Spritz"
+              class="w-full min-h-[42px] px-3.5 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-white/70 mb-1">Codex Folder</label>
+            <select
+              id="edit-drink-folder"
+              class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"
+            >
+              <option value="signature">Signature Cocktails</option>
+              <option value="classic">Cocktails</option>
+              <option value="mocktails">Mocktails</option>
+              <option value="aperitif">Apéritif</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cocktail Photo (Upload from Tablet/Camera or Image URL) -->
+        <div class="bg-[#242424] border border-white/10 rounded-xl p-3.5 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#40C4C6]">Cocktail Photo (Optional)</span>
+            <button
+              id="btn-remove-drink-photo"
+              type="button"
+              onclick="clearEditorPhoto()"
+              class="hidden px-2.5 py-1 rounded-lg text-[11px] font-bold bg-red-500/20 hover:bg-red-500/30 text-red-300 transition"
+            >
+              Remove Photo
+            </button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <!-- Thumbnail Preview -->
+            <div id="editor-photo-preview-box" onclick="if(editorPhotoState) openFullscreenPhoto(editorPhotoState, document.getElementById('edit-drink-name').value || 'Cocktail Preview')" class="w-full sm:w-24 h-24 rounded-xl bg-[#191919] border border-white/15 flex items-center justify-center overflow-hidden shrink-0">
+              <img id="editor-photo-preview" src="" alt="Preview" class="hidden w-full h-full object-cover cursor-zoom-in" />
+              <span id="editor-photo-placeholder" class="text-[11px] text-white/40 text-center px-2">No Photo</span>
+            </div>
+
+            <div class="flex-1 space-y-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <label class="min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] cursor-pointer transition inline-flex items-center gap-1.5 active:scale-95">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span>Upload / Take Photo</span>
+                  <input
+                    id="edit-drink-photo-file"
+                    type="file"
+                    accept="image/*"
+                    onchange="handleEditorPhotoUpload(event)"
+                    class="hidden"
+                  />
+                </label>
+                <span class="text-[11px] text-white/50">or paste image link below</span>
+              </div>
+              <input
+                id="edit-drink-photo-url"
+                type="url"
+                placeholder="https://example.com/cocktail-photo.jpg"
+                oninput="handleEditorPhotoUrlInput(this.value)"
+                class="w-full px-3 py-2 rounded-xl bg-[#191919] border border-white/15 text-xs text-white focus:outline-none focus:border-[#40C4C6]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Glassware, Ice, Technique -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-white/70 mb-1">Glassware</label>
+            <select id="edit-drink-glass" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-white/70 mb-1">Ice Type</label>
+            <select id="edit-drink-ice" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-white/70 mb-1">Technique</label>
+            <select id="edit-drink-technique" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"></select>
+          </div>
+        </div>
+
+        <!-- Ingredient Rows -->
+        <div class="bg-[#242424] border border-white/10 rounded-xl p-3.5 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#40C4C6]">Recipe Ingredients &amp; Amounts (cl)</span>
+            <button
+              type="button"
+              onclick="addEditorIngredientRow()"
+              class="min-h-[36px] px-3 py-1 rounded-lg text-xs font-bold bg-[#40C4C6] text-[#242424] hover:bg-[#32a3a5] transition"
+            >
+              + Add Row
+            </button>
+          </div>
+          <div id="editor-ingredients-container" class="space-y-2"></div>
+        </div>
+
+        <!-- Multiple Garnishes Selector -->
+        <div class="bg-[#242424] border border-white/10 rounded-xl p-3.5 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#40C4C6] block">Garnishes (Select one or more)</span>
+          <div id="editor-garnishes-container" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- How to Make It -->
+        <div>
+          <label class="block text-xs font-bold text-white/70 mb-1">How to Make It (Preparation Instructions)</label>
+          <textarea
+            id="edit-drink-instructions"
+            rows="3"
+            placeholder="Describe the exact preparation steps, garnish placement, and serving ritual..."
+            class="w-full px-3.5 py-2 rounded-xl bg-[#242424] border border-white/15 text-sm text-white focus:outline-none focus:border-[#40C4C6]"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Sticky Editor Footer Actions -->
+      <div class="px-4 sm:px-6 py-3 sm:py-4 bg-[#191919] border-t border-white/10 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
+        <button
+          id="btn-delete-recipe"
+          type="button"
+          onclick="deleteEditedRecipe()"
+          class="hidden min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold bg-red-500/20 text-red-300 hover:bg-red-500/30 border border-red-500/30 transition"
+        >
+          Delete Recipe
+        </button>
+        <div class="flex items-center gap-2 ml-auto">
+          <button
+            type="button"
+            onclick="closeRecipeEditor()"
+            class="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold bg-[#2c2c2c] text-white/80 hover:text-white transition"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onclick="saveEditedRecipe()"
+            class="min-h-[42px] px-5 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition"
+          >
+            Save Recipe
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FULLSCREEN PHOTO LIGHTBOX MODAL ==================== -->
+  <div id="photo-lightbox-modal" onclick="if(event.target === this) closeFullscreenPhoto()" class="fixed inset-0 z-[80] hidden bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-8">
+    <div class="w-full max-w-4xl flex items-center justify-between gap-3 mb-3">
+      <h3 id="photo-lightbox-title" class="text-base sm:text-lg font-extrabold text-white truncate"></h3>
+      <button
+        type="button"
+        onclick="closeFullscreenPhoto()"
+        class="min-h-[44px] px-4 py-2 rounded-xl bg-[#191919] hover:bg-[#40C4C6] text-white hover:text-[#242424] border border-white/20 text-xs sm:text-sm font-extrabold transition flex items-center gap-2 shrink-0"
+      >
+        <span>Close</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="relative flex-1 w-full max-w-4xl flex items-center justify-center overflow-hidden">
+      <img
+        id="photo-lightbox-img"
+        src=""
+        alt="Fullscreen Cocktail Photo"
+        class="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-2xl border border-white/15 shadow-2xl"
+      />
+    </div>
+  </div>
+
+  <!-- ==================== CONFIRMATION DIALOG MODAL (NO native confirm/alert) ==================== -->
+  <div id="confirm-modal" class="fixed inset-0 z-[70] hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#191919] border border-white/15 rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <h3 id="confirm-title" class="text-lg font-extrabold text-white">Confirm Action</h3>
+      <p id="confirm-message" class="text-xs sm:text-sm text-white/75 leading-relaxed"></p>
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button
+          onclick="closeConfirmModal()"
+          class="px-4 py-2 rounded-xl text-xs font-bold bg-[#2c2c2c] text-white/80 hover:text-white transition"
+        >
+          Cancel
+        </button>
+        <button
+          id="confirm-yes-btn"
+          class="px-4 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] text-[#242424] hover:bg-[#32a3a5] transition"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== APPLICATION LOGIC ==================== -->
+  <script>
+    // =========================================================================
+    // 1. CONSTANTS, LOCAL STORAGE & OPTIONAL CLOUD SYNC CONFIG
+    // =========================================================================
+    const ADMIN_PIN = '3970';
+    const STORAGE_KEYS = {
+      recipes: 'cloudLounge_recipes_v1',
+      ingredients: 'cloudLounge_ingredients_v1',
+      garnishes: 'cloudLounge_garnishes_v1'
+    };
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'cloud-lounge-school';
+    let db = null;
+    let auth = null;
+    let cloudUser = null;
+    let isCloudReady = false;
+    let isApplyingRemoteUpdate = false;
+
+    const FOLDER_META = {
+      signature: { label: 'Signature Cocktails', short: 'Signature' },
+      classic: { label: 'Cocktails', short: 'Cocktails' },
+      mocktails: { label: 'Mocktails', short: 'Mocktails' },
+      aperitif: { label: 'Apéritif', short: 'Apéritif' }
+    };
+
+    const INGREDIENT_CATEGORIES = ['Spirits', 'Liquors', 'Syrups', 'Juices/Soda', 'Specials'];
+
+    const GLASSWARE_OPTIONS = [
+      { id: 'rocks', name: 'Tumbler / Rocks', subtitle: 'Lowball & Spirit-Forward' },
+      { id: 'highball', name: 'Highball / Collins', subtitle: 'Tall & Refreshing' },
+      { id: 'coupe', name: 'Cocktail Coupe', subtitle: 'Chilled & Served Up' },
+      { id: 'hurricane', name: 'Hurricane Glass', subtitle: 'Tropical & Signatures' },
+      { id: 'red_wine', name: 'Red Wine Glass', subtitle: 'Large Bowl & Aromatics' },
+      { id: 'white_wine', name: 'White Wine Glass', subtitle: 'Crisp & Chilled Stemware' },
+      { id: 'flute', name: 'Flute Glass', subtitle: 'Sparkling & Champagne' },
+      { id: 'mule', name: 'Mule Glass', subtitle: 'Copper Mug & Ginger' },
+      { id: 'tiki', name: 'Tiki Glass', subtitle: 'Exotic & Carved Mug' }
+    ];
+
+    const ICE_OPTIONS = [
+      { id: 'none', name: 'No Ice (Up)', subtitle: 'Chilled & Strained' },
+      { id: 'cubed', name: 'Cubed Ice', subtitle: 'Standard Bar Cubes' },
+      { id: 'crushed', name: 'Crushed Ice', subtitle: 'High Dilution & Chill' }
+    ];
+
+    const TECHNIQUE_OPTIONS = [
+      { id: 'build', name: 'Build in Glass', subtitle: 'Pour directly over ice & layer' },
+      { id: 'shake', name: 'Shake with Ice', subtitle: 'Vigorous aeration & chill' },
+      { id: 'shake_double', name: 'Shake with Ice & Double Strain', subtitle: 'Fine mesh strain for silky clarity' },
+      { id: 'stir', name: 'Stir with Barspoon', subtitle: 'Silky texture & controlled dilution' }
+    ];
+
+    const JIGGER_INCREMENTS = [0.2, 0.5, 0.8, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12];
+
+    const DEFAULT_INGREDIENTS = [
+      // Spirits
+      { id: 'ing_remy_martin', name: 'Remy Martin VSOP', category: 'Spirits', color: '#B55218' },
+      { id: 'ing_berliner_gin', name: 'Berliner Brandstifter Gin', category: 'Spirits', color: '#E2F4F2' },
+      { id: 'ing_chopin_vodka', name: 'Chopin Wheat Vodka', category: 'Spirits', color: '#E8F6F8' },
+      { id: 'ing_san_cosme_mezcal', name: 'San Cosme Mezcal', category: 'Spirits', color: '#EEF4E8' },
+      { id: 'ing_tequila_1800', name: 'Tequila 1800 Blanco', category: 'Spirits', color: '#F0F5DC' },
+      { id: 'ing_woodford_bourbon', name: 'Woodford Reserve Bourbon', category: 'Spirits', color: '#C6641A' },
+      { id: 'ing_blaufrankisch', name: 'Kerschbaum Blaufränkisch', category: 'Spirits', color: '#6E1423' },
+      { id: 'ing_havana_3', name: 'Havana Club 3 Jahre', category: 'Spirits', color: '#F3EED9' },
+      { id: 'ing_pitu_cachaca', name: 'Pitu Cachaça', category: 'Spirits', color: '#EBF5EC' },
+      { id: 'ing_bulleit_rye', name: 'Bulleit Rye Whiskey', category: 'Spirits', color: '#C95E18' },
+      { id: 'ing_saigon_gin', name: 'Saigon Baigur Gin', category: 'Spirits', color: '#DCF2EE' },
+      { id: 'ing_nordes_gin', name: 'Nordés Atlantic Galician Gin', category: 'Spirits', color: '#E4F3F7' },
+      { id: 'ing_hennessy', name: 'Hennessy VS Cognac', category: 'Spirits', color: '#B55218' },
+      { id: 'ing_belvedere', name: 'Belvedere Vodka', category: 'Spirits', color: '#DCEEF2' },
+      { id: 'ing_gin', name: 'London Dry Gin', category: 'Spirits', color: '#DDF2F0' },
+      { id: 'ing_prosecco', name: 'Prosecco DOC', category: 'Spirits', color: '#F7F0C6' },
+
+      // Liquors
+      { id: 'ing_creme_cassis', name: 'Bols Creme de Cassis', category: 'Liquors', color: '#4B1028' },
+      { id: 'ing_mozart_choc', name: 'Mozart Creme Chocolate', category: 'Liquors', color: '#5C3317' },
+      { id: 'ing_apricot_brandy', name: 'Bols Apricot Brandy', category: 'Liquors', color: '#E07A1F' },
+      { id: 'ing_ramazzotti', name: 'Ramazzotti Amaro', category: 'Liquors', color: '#3E1C14' },
+      { id: 'ing_yuzu_sake', name: 'Yuzu Sake', category: 'Liquors', color: '#F4F1C8' },
+      { id: 'ing_campari', name: 'Campari', category: 'Liquors', color: '#D61C29' },
+      { id: 'ing_vermouth_sweet', name: 'Sweet Red Vermouth', category: 'Liquors', color: '#6E1418' },
+
+      // Syrups
+      { id: 'ing_monin_zimt', name: 'Monin Zimt / Cinnamon Syrup', category: 'Syrups', color: '#A84A18' },
+      { id: 'ing_monin_coconut', name: 'Monin Coconut Syrup', category: 'Syrups', color: '#F7F5EE' },
+      { id: 'ing_monin_mandel', name: 'Monin Mandel / Orgeat Syrup', category: 'Syrups', color: '#EDE2C8' },
+      { id: 'ing_monin_vanille', name: 'Monin Vanille Syrup', category: 'Syrups', color: '#D9A45B' },
+      { id: 'ing_monin_birne', name: 'Monin Birne / Pear Purée', category: 'Syrups', color: '#D8CF7A' },
+      { id: 'ing_darbo_holunder', name: 'Darbo Holunderblüten Syrup', category: 'Syrups', color: '#EFE6B8' },
+      { id: 'ing_simple', name: 'Kristall Zucker / Simple Syrup', category: 'Syrups', color: '#F4F4F0' },
+      { id: 'ing_elderflower', name: 'Elderflower Syrup', category: 'Syrups', color: '#EFE6B8' },
+      { id: 'ing_raspberry_syrup', name: 'Raspberry Syrup', category: 'Syrups', color: '#C81D4E' },
+      { id: 'ing_grenadine', name: 'Grenadine', category: 'Syrups', color: '#B8142C' },
+      { id: 'ing_agave', name: 'Agave Nectar', category: 'Syrups', color: '#D4943A' },
+
+      // Juices/Soda
+      { id: 'ing_happy_day_kirsche', name: 'Happy Day Kirsche / Cherry Juice', category: 'Juices/Soda', color: '#8F1124' },
+      { id: 'ing_thomas_henry_grapefruit', name: 'Thomas Henry Pink Grapefruit', category: 'Juices/Soda', color: '#F5989D' },
+      { id: 'ing_lime', name: 'Rauch Limettensaft', category: 'Juices/Soda', color: '#CBEB6B' },
+      { id: 'ing_lemon', name: 'Fresh Lemon Juice', category: 'Juices/Soda', color: '#F6E86E' },
+      { id: 'ing_apricot_nectar', name: 'Rauch Marillennektar 40%', category: 'Juices/Soda', color: '#ED8B26' },
+      { id: 'ing_maracuja_saft', name: 'Rauch Maracujasaft', category: 'Juices/Soda', color: '#F4A922' },
+      { id: 'ing_apfelsaft', name: 'Rauch Apfelsaft', category: 'Juices/Soda', color: '#D9A338' },
+      { id: 'ing_soda', name: 'Soda Water', category: 'Juices/Soda', color: '#D9F3F5' },
+      { id: 'ing_tonic', name: 'Indian Tonic Water', category: 'Juices/Soda', color: '#E2F5F7' },
+      { id: 'ing_ginger_beer', name: 'Ginger Beer', category: 'Juices/Soda', color: '#E8C97A' },
+
+      // Specials
+      { id: 'ing_schlagobers', name: 'Österreichischer Schlagobers (Cream)', category: 'Specials', color: '#FFFDF7' },
+      { id: 'ing_alpenkrauter_tee', name: "Heidi's Delight Alpenkräuter Tee", category: 'Specials', color: '#B8C97E' },
+      { id: 'ing_espresso', name: 'Café Intención Espresso', category: 'Specials', color: '#2B160C' },
+      { id: 'ing_egg_white', name: 'Eifix Konditor Eiweiß', category: 'Specials', color: '#FAFAFA' },
+      { id: 'ing_kurbiskernol', name: 'Hamlitsch Bio Kürbiskernöl', category: 'Specials', color: '#2A4218' },
+      { id: 'ing_chiliol', name: 'Kotányi Chiliöl', category: 'Specials', color: '#C92A18' },
+      { id: 'ing_angostura', name: 'Angostura Bitters', category: 'Specials', color: '#6E1414' },
+      { id: 'ing_mint_leaves', name: 'Fresh Mint Leaves', category: 'Specials', color: '#2E8B57' }
+    ];
+
+    const DEFAULT_GARNISHES = [
+      { id: 'gar_gold_leaf', name: '24k Gold Leaf', emoji: '✨' },
+      { id: 'gar_lemon_twist', name: 'Lemon Twist', emoji: '🍋' },
+      { id: 'gar_orange_zest', name: 'Flamed Orange Peel', emoji: '🍊' },
+      { id: 'gar_lime_wheel', name: 'Dehydrated Lime', emoji: '🍈' },
+      { id: 'gar_mint_sprig', name: 'Fresh Mint Sprig', emoji: '🌿' },
+      { id: 'gar_raspberries', name: 'Fresh Raspberries', emoji: '🫐' },
+      { id: 'gar_apricot_slice', name: 'Dried Apricot & Rosemary', emoji: '🍑' },
+      { id: 'gar_cucumber_ribbon', name: 'Cucumber Ribbon', emoji: '🥒' },
+      { id: 'gar_edible_flower', name: 'Edible Viola Flower', emoji: '🌸' },
+      { id: 'gar_chocolate_shavings', name: 'Chocolate Shavings', emoji: '🍫' },
+      { id: 'gar_coffee_beans', name: 'Three Coffee Beans', emoji: '☕' },
+      { id: 'gar_cocktail_cherry', name: 'Maraschino Cherry', emoji: '🍒' }
+    ];
+
+    const DEFAULT_RECIPES = [
+      {
+        id: 'rec_mirabell_samt',
+        name: 'Mirabell Samt',
+        folder: 'signature',
+        photo: '',
+        glass: 'coupe',
+        ice: 'none',
+        technique: 'shake',
+        ingredients: [
+          { id: 'ing_remy_martin', amount: 3.0 },
+          { id: 'ing_creme_cassis', amount: 2.0 },
+          { id: 'ing_happy_day_kirsche', amount: 4.0 },
+          { id: 'ing_monin_zimt', amount: 1.0 },
+          { id: 'ing_monin_coconut', amount: 1.0 },
+          { id: 'ing_schlagobers', amount: 3.0 }
+        ],
+        garnishes: ['gar_cocktail_cherry'],
+        instructions: 'Shake Remy Martin VSOP, Bols Creme de Cassis, Happy Day Cherry juice, Monin Cinnamon & Coconut syrups, and Austrian Schlagobers cream with ice until velvety. Strain into a chilled coupe.'
+      },
+      {
+        id: 'rec_gin_and_green',
+        name: 'Gin & Green',
+        folder: 'signature',
+        photo: '',
+        glass: 'highball',
+        ice: 'cubed',
+        technique: 'build',
+        ingredients: [
+          { id: 'ing_berliner_gin', amount: 4.0 },
+          { id: 'ing_thomas_henry_grapefruit', amount: 10.0 },
+          { id: 'ing_alpenkrauter_tee', amount: 14.0 },
+          { id: 'ing_lime', amount: 2.0 },
+          { id: 'ing_simple', amount: 2.0 }
+        ],
+        garnishes: ['gar_mint_sprig', 'gar_lime_wheel'],
+        instructions: 'Build in a chilled highball glass over cubed ice: pour Berliner Brandstifter Gin, fresh lime juice, Kristall Zucker syrup, chilled Heidi’s Delight Alpine Herbal Tea, and top with Thomas Henry Pink Grapefruit.'
+      },
+      {
+        id: 'rec_mozartini',
+        name: 'Mozartini',
+        folder: 'signature',
+        photo: '',
+        glass: 'coupe',
+        ice: 'none',
+        technique: 'shake_double',
+        ingredients: [
+          { id: 'ing_chopin_vodka', amount: 3.0 },
+          { id: 'ing_mozart_choc', amount: 3.0 },
+          { id: 'ing_monin_mandel', amount: 2.0 },
+          { id: 'ing_espresso', amount: 0.8 }
+        ],
+        garnishes: ['gar_coffee_beans', 'gar_chocolate_shavings'],
+        instructions: 'Shake Chopin Wheat Vodka, Mozart Creme Chocolate liqueur, Monin Mandel (almond) syrup, and fresh Café Intención espresso vigorously with ice. Double strain into a chilled coupe.'
+      },
+      {
+        id: 'rec_brennende_marille',
+        name: 'Brennende Marille',
+        folder: 'signature',
+        photo: '',
+        glass: 'rocks',
+        ice: 'cubed',
+        technique: 'shake',
+        ingredients: [
+          { id: 'ing_san_cosme_mezcal', amount: 2.0 },
+          { id: 'ing_tequila_1800', amount: 2.0 },
+          { id: 'ing_apricot_brandy', amount: 2.0 },
+          { id: 'ing_apricot_nectar', amount: 4.0 },
+          { id: 'ing_lime', amount: 2.0 },
+          { id: 'ing_simple', amount: 2.0 }
+        ],
+        garnishes: ['gar_apricot_slice'],
+        instructions: 'Shake San Cosme Mezcal, Tequila 1800 Blanco, Bols Apricot Brandy, Rauch Apricot Nectar, lime juice, and sugar syrup with ice. Strain over cubed ice in a tumbler and garnish with dried apricot.'
+      },
+      {
+        id: 'rec_salzburg_sour',
+        name: 'Salzburg Sour',
+        folder: 'signature',
+        photo: '',
+        glass: 'rocks',
+        ice: 'cubed',
+        technique: 'shake',
+        ingredients: [
+          { id: 'ing_woodford_bourbon', amount: 4.0 },
+          { id: 'ing_blaufrankisch', amount: 3.0 },
+          { id: 'ing_lime', amount: 2.0 },
+          { id: 'ing_egg_white', amount: 2.0 },
+          { id: 'ing_simple', amount: 2.0 }
+        ],
+        garnishes: ['gar_lemon_twist', 'gar_cocktail_cherry'],
+        instructions: 'Dry shake Woodford Reserve Bourbon, lime juice, sugar syrup, and Eifix egg white, then shake hard with ice. Strain over cubed ice in a tumbler and float Kerschbaum Blaufränkisch red wine on top.'
+      },
+      {
+        id: 'rec_golden_cane',
+        name: 'Golden Cane',
+        folder: 'signature',
+        photo: '',
+        glass: 'hurricane',
+        ice: 'crushed',
+        technique: 'shake',
+        ingredients: [
+          { id: 'ing_havana_3', amount: 4.0 },
+          { id: 'ing_pitu_cachaca', amount: 2.0 },
+          { id: 'ing_monin_vanille', amount: 2.0 },
+          { id: 'ing_maracuja_saft', amount: 6.0 },
+          { id: 'ing_lime', amount: 2.0 }
+        ],
+        garnishes: ['gar_mint_sprig', 'gar_orange_zest'],
+        instructions: 'Shake Havana Club 3, Pitu Cachaça, Monin Vanilla syrup, Rauch Passionfruit juice, and fresh lime juice with ice. Pour over crushed ice in a hurricane glass.'
+      },
+      {
+        id: 'rec_klimt',
+        name: 'Klimt',
+        folder: 'signature',
+        photo: '',
+        glass: 'rocks',
+        ice: 'cubed',
+        technique: 'shake',
+        ingredients: [
+          { id: 'ing_bulleit_rye', amount: 5.0 },
+          { id: 'ing_ramazzotti', amount: 2.0 },
+          { id: 'ing_monin_birne', amount: 2.0 },
+          { id: 'ing_lime', amount: 2.0 },
+          { id: 'ing_kurbiskernol', amount: 0.5 },
+          { id: 'ing_chiliol', amount: 0.2 }
+        ],
+        garnishes: ['gar_gold_leaf'],
+        instructions: 'Shake Bulleit Rye Whiskey, Ramazzotti Amaro, Monin Pear purée, and lime juice with ice. Strain over cubed ice in a tumbler and finish with drops of Hamlitsch Pumpkin Seed Oil and Kotányi Chili Oil.'
+      },
+      {
+        id: 'rec_gin_valley_east',
+        name: 'Gin Valley East',
+        folder: 'signature',
+        photo: '',
+        glass: 'highball',
+        ice: 'cubed',
+        technique: 'build',
+        ingredients: [
+          { id: 'ing_saigon_gin', amount: 3.0 },
+          { id: 'ing_yuzu_sake', amount: 3.0 },
+          { id: 'ing_darbo_holunder', amount: 2.0 },
+          { id: 'ing_soda', amount: 6.0 }
+        ],
+        garnishes: ['gar_mint_sprig', 'gar_lime_wheel'],
+        instructions: 'Build in a highball glass over cubed ice: combine Saigon Baigur Gin, Yuzu Sake, and Darbo Elderflower syrup, stir gently, and top with chilled soda water.'
+      },
+      {
+        id: 'rec_the_cloud',
+        name: 'The Cloud',
+        folder: 'signature',
+        photo: '',
+        glass: 'highball',
+        ice: 'cubed',
+        technique: 'shake',
+        ingredients: [
+          { id: 'ing_nordes_gin', amount: 4.0 },
+          { id: 'ing_apfelsaft', amount: 4.0 },
+          { id: 'ing_monin_mandel', amount: 2.0 },
+          { id: 'ing_lime', amount: 2.0 },
+          { id: 'ing_soda', amount: 4.0 },
+          { id: 'ing_egg_white', amount: 2.0 }
+        ],
+        garnishes: ['gar_edible_flower'],
+        instructions: 'Dry shake Nordés Gin, Rauch Apple juice, Monin Mandel syrup, lime juice, and Eifix egg white, then shake with ice. Strain into a highball over cubed ice and top with soda water.'
+      }
+    ];
+
+    // =========================================================================
+    // 2. APPLICATION STATE
+    // =========================================================================
+    let recipes = [];
+    let ingredients = [];
+    let garnishes = [];
+
+    let gameMode = 'memory'; // 'memory' | 'study'
+    let practiceFolderFilter = 'all'; // 'all' | 'signature' | 'classic' | 'mocktails' | 'aperitif'
+
+    let currentOrder = null;
+    let memoryTimerInterval = null;
+    let memorySecondsLeft = 9;
+    let isRecipeVisible = true;
+
+    let activeStep = 1;
+    let activeIngredientCategory = 'Spirits';
+    let selectedJiggerVolume = 2;
+    let isExactPourMode = false;
+
+    let playerBuild = {
+      glass: 'rocks',
+      ice: 'cubed',
+      pours: [], // [{ id, amount }]
+      technique: null,
+      garnishes: []
+    };
+
+    // Codex, Search & Admin State
+    let isAdminUnlocked = false;
+    let pendingPinSuccessCallback = null;
+    let activeCodexTab = 'recipes';
+    let activeCodexFolder = 'signature';
+    let codexSearchQuery = '';
+    let editingRecipeId = null;
+    let editorIngredientRows = [];
+    let editorSelectedGarnishes = [];
+    let editorPhotoState = '';
+    let pendingConfirmCallback = null;
+
+    // =========================================================================
+    // 3. DATA PERSISTENCE & CLOUD SYNC
+    // =========================================================================
+    function normalizeRecipesList(list) {
+      return list.map((rec) => ({
+        ...rec,
+        folder: rec.folder || 'signature',
+        photo: rec.photo || '',
+        ice: rec.ice === 'king' ? 'cubed' : (rec.ice || 'cubed'),
+        garnishes: Array.isArray(rec.garnishes) ? rec.garnishes : [],
+        ingredients: Array.isArray(rec.ingredients) ? rec.ingredients : []
+      }));
+    }
+
+    function loadDefaultInMemoryData() {
+      recipes = normalizeRecipesList(JSON.parse(JSON.stringify(DEFAULT_RECIPES)));
+      ingredients = JSON.parse(JSON.stringify(DEFAULT_INGREDIENTS));
+      garnishes = JSON.parse(JSON.stringify(DEFAULT_GARNISHES));
+    }
+
+    function loadLocalPersistedData() {
+      try {
+        const savedRecipes = localStorage.getItem(STORAGE_KEYS.recipes);
+        const savedIngredients = localStorage.getItem(STORAGE_KEYS.ingredients);
+        const savedGarnishes = localStorage.getItem(STORAGE_KEYS.garnishes);
+
+        if (savedRecipes) {
+          const parsed = JSON.parse(savedRecipes);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            recipes = normalizeRecipesList(parsed);
+          }
+        }
+        if (savedIngredients) {
+          const parsedIng = JSON.parse(savedIngredients);
+          if (Array.isArray(parsedIng) && parsedIng.length > 0) {
+            ingredients = parsedIng;
+          }
+        }
+        if (savedGarnishes) {
+          const parsedGar = JSON.parse(savedGarnishes);
+          if (Array.isArray(parsedGar) && parsedGar.length > 0) {
+            garnishes = parsedGar;
+          }
+        }
+      } catch (err) {
+        console.warn('Could not read localStorage data:', err);
+      }
+    }
+
+    function saveLocalPersistedData() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.recipes, JSON.stringify(recipes));
+        localStorage.setItem(STORAGE_KEYS.ingredients, JSON.stringify(ingredients));
+        localStorage.setItem(STORAGE_KEYS.garnishes, JSON.stringify(garnishes));
+      } catch (err) {
+        console.warn('Could not save to localStorage:', err);
+      }
+    }
+
+    async function pushCatalogToCloud() {
+      saveLocalPersistedData();
+      if (!isCloudReady || !db || isApplyingRemoteUpdate) return;
+      try {
+        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
+        const sharedCatalogDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'barCatalog', 'master');
+        await setDoc(sharedCatalogDocRef, {
+          recipes: JSON.stringify(recipes),
+          ingredients: JSON.stringify(ingredients),
+          garnishes: JSON.stringify(garnishes),
+          updatedAt: Date.now()
+        });
+      } catch (err) {
+        console.warn('Cloud push skipped:', err);
+      }
+    }
+
+    async function initCloudSync() {
+      loadDefaultInMemoryData();
+      loadLocalPersistedData();
+
+      try {
+        if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+          return;
+        }
+
+        const [
+          { initializeApp },
+          { getAuth, signInAnonymously, signInWithCustomToken },
+          { getFirestore, doc, setDoc, onSnapshot }
+        ] = await Promise.all([
+          import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"),
+          import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"),
+          import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js")
+        ]);
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          const cred = await signInWithCustomToken(auth, __initial_auth_token);
+          cloudUser = cred.user;
+        } else {
+          const cred = await signInAnonymously(auth);
+          cloudUser = cred.user;
+        }
+
+        const sharedCatalogDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'barCatalog', 'master');
+
+        onSnapshot(sharedCatalogDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            isApplyingRemoteUpdate = true;
+            try {
+              if (data.recipes) {
+                recipes = normalizeRecipesList(JSON.parse(data.recipes));
+              }
+              if (data.ingredients) {
+                ingredients = JSON.parse(data.ingredients);
+              }
+              if (data.garnishes) {
+                garnishes = JSON.parse(data.garnishes);
+              }
+              saveLocalPersistedData();
+
+              if (currentOrder) {
+                const updatedCurrent = recipes.find((r) => r.id === currentOrder.id);
+                if (updatedCurrent) {
+                  currentOrder = JSON.parse(JSON.stringify(updatedCurrent));
+                  renderOrderSpecCard();
+                }
+              }
+              renderWorkstationControls();
+              if (!document.getElementById('codex-modal').classList.contains('hidden')) {
+                refreshActiveCodexTab();
+              }
+            } finally {
+              isApplyingRemoteUpdate = false;
+            }
+          } else {
+            pushCatalogToCloud();
+          }
+          isCloudReady = true;
+        }, (err) => {
+          console.warn('Cloud snapshot error:', err);
+        });
+      } catch (err) {
+        console.warn('Cloud sync unavailable, running in local device mode:', err);
+      }
+    }
+
+    // =========================================================================
+    // 4. UI UTILITIES & TOAST NOTIFICATIONS
+    // =========================================================================
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      const borderClass = type === 'error'
+        ? 'border-red-500/60 bg-[#191919] text-red-200'
+        : type === 'success'
+          ? 'border-[#40C4C6] bg-[#191919] text-white'
+          : 'border-white/20 bg-[#191919] text-white';
+
+      toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl border ${borderClass} shadow-xl text-xs font-bold flex items-center gap-2 transition-all duration-300`;
+      toast.innerHTML = `<span class="w-2 h-2 rounded-full ${type === 'error' ? 'bg-red-400' : 'bg-[#40C4C6]'}"></span><span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(6px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 2800);
+    }
+
+    function getFolderLabel(folderId, short = false) {
+      const meta = FOLDER_META[folderId] || FOLDER_META.signature;
+      return short ? meta.short : meta.label;
+    }
+
+    function getGlassLabel(id) {
+      const found = GLASSWARE_OPTIONS.find((g) => g.id === id);
+      return found ? found.name : id;
+    }
+
+    function getIceLabel(id) {
+      const found = ICE_OPTIONS.find((i) => i.id === id);
+      return found ? found.name : id;
+    }
+
+    function getTechniqueLabel(id) {
+      const found = TECHNIQUE_OPTIONS.find((t) => t.id === id);
+      return found ? found.name : (id || 'Not Selected');
+    }
+
+    function getIngredientById(id) {
+      return ingredients.find((i) => i.id === id) || { id, name: id, category: 'Specials', color: '#40C4C6' };
+    }
+
+    function getGarnishById(id) {
+      return garnishes.find((g) => g.id === id) || { id, name: id, emoji: '🍋' };
+    }
+
+    // =========================================================================
+    // 5. GAME MODE, ORDER SELECTION & MEMORY COUNTDOWN
+    // =========================================================================
+    function toggleGameMode() {
+      gameMode = gameMode === 'memory' ? 'study' : 'memory';
+      const labelEl = document.getElementById('mode-label');
+      const dotEl = document.getElementById('mode-indicator-dot');
+
+      if (gameMode === 'memory') {
+        labelEl.textContent = 'Memory Mode (9s)';
+        dotEl.className = 'w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#40C4C6] shrink-0';
+        startMemoryCountdown();
+      } else {
+        labelEl.textContent = 'Study Mode';
+        dotEl.className = 'w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-400 shrink-0';
+        stopMemoryCountdown();
+        setRecipeCardVisibility(true);
+        document.getElementById('memory-timer-text').innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-amber-400"></span><span>Study Mode: Recipe Always Visible</span>`;
+        document.getElementById('btn-peek-recipe').classList.add('hidden');
+      }
+    }
+
+    function setPracticeFolderFilter(folder) {
+      practiceFolderFilter = folder;
+      startNewOrder();
+    }
+
+    function getFilteredPracticePool() {
+      if (practiceFolderFilter === 'all') return recipes;
+      const filtered = recipes.filter((r) => (r.folder || 'signature') === practiceFolderFilter);
+      return filtered.length > 0 ? filtered : recipes;
+    }
+
+    function startNewOrder(excludeId = null) {
+      const pool = getFilteredPracticePool();
+      if (!pool || pool.length === 0) return;
+
+      let candidates = pool;
+      if (excludeId && pool.length > 1) {
+        candidates = pool.filter((r) => r.id !== excludeId);
+      }
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      currentOrder = JSON.parse(JSON.stringify(chosen));
+
+      document.getElementById('target-drink-name').textContent = currentOrder.name;
+      renderOrderSpecCard();
+      resetCurrentBuild(true);
+
+      if (gameMode === 'memory') {
+        startMemoryCountdown();
+      } else {
+        stopMemoryCountdown();
+        setRecipeCardVisibility(true);
+        document.getElementById('memory-timer-text').innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-amber-400"></span><span>Study Mode: Recipe Always Visible</span>`;
+        document.getElementById('btn-peek-recipe').classList.add('hidden');
+      }
+    }
+
+    function skipToNextOrder() {
+      startNewOrder(currentOrder ? currentOrder.id : null);
+      showToast('Skipped to next cocktail order');
+    }
+
+    function startMemoryCountdown() {
+      stopMemoryCountdown();
+      memorySecondsLeft = 9;
+      setRecipeCardVisibility(true);
+      const peekBtn = document.getElementById('btn-peek-recipe');
+      peekBtn.classList.add('hidden');
+      peekBtn.textContent = 'Peek Recipe';
+
+      const timerText = document.getElementById('memory-timer-text');
+      timerText.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-[#40C4C6] animate-ping"></span><span>Memorize recipe: <strong id="countdown-seconds">9</strong>s remaining</span>`;
+
+      memoryTimerInterval = setInterval(() => {
+        memorySecondsLeft -= 1;
+        const secEl = document.getElementById('countdown-seconds');
+        if (secEl) secEl.textContent = String(Math.max(0, memorySecondsLeft));
+
+        if (memorySecondsLeft <= 0) {
+          stopMemoryCountdown();
+          setRecipeCardVisibility(false);
+          timerText.innerHTML = `<span class="inline-block w-2 h-2 rounded-full bg-white/40"></span><span>Memory Phase Active</span>`;
+          peekBtn.classList.remove('hidden');
+        }
+      }, 1000);
+    }
+
+    function stopMemoryCountdown() {
+      if (memoryTimerInterval) {
+        clearInterval(memoryTimerInterval);
+        memoryTimerInterval = null;
+      }
+    }
+
+    function setRecipeCardVisibility(visible) {
+      isRecipeVisible = visible;
+      const specCard = document.getElementById('recipe-spec-card');
+      const lockedCard = document.getElementById('recipe-locked-card');
+      if (visible) {
+        specCard.classList.remove('hidden');
+        lockedCard.classList.add('hidden');
+      } else {
+        specCard.classList.add('hidden');
+        lockedCard.classList.remove('hidden');
+      }
+    }
+
+    function togglePeekRecipe() {
+      const nextVisible = !isRecipeVisible;
+      setRecipeCardVisibility(nextVisible);
+      const peekBtn = document.getElementById('btn-peek-recipe');
+      peekBtn.textContent = nextVisible ? 'Hide Recipe' : 'Peek Recipe';
+    }
+
+    function renderOrderSpecCard() {
+      if (!currentOrder) return;
+
+      const photoWrapper = document.getElementById('spec-photo-wrapper');
+      const photoImg = document.getElementById('spec-photo-img');
+      if (currentOrder.photo) {
+        photoImg.src = currentOrder.photo;
+        photoWrapper.classList.remove('hidden');
+      } else {
+        photoImg.src = '';
+        photoWrapper.classList.add('hidden');
+      }
+
+      document.getElementById('spec-glass').textContent = getGlassLabel(currentOrder.glass);
+      document.getElementById('spec-ice').textContent = getIceLabel(currentOrder.ice);
+      document.getElementById('spec-technique').textContent = getTechniqueLabel(currentOrder.technique);
+
+      const ingList = document.getElementById('spec-ingredients');
+      ingList.innerHTML = currentOrder.ingredients.map((item) => {
+        const info = getIngredientById(item.id);
+        return `
+          <li class="flex items-center justify-between bg-[#191919] px-2.5 py-1.5 rounded-lg border border-white/5">
+            <span class="flex items-center gap-2 text-white/90 font-medium">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color:${escapeHtml(info.color)}"></span>
+              <span>${escapeHtml(info.name)}</span>
+            </span>
+            <span class="font-extrabold text-[#40C4C6]">${item.amount} cl</span>
+          </li>
+        `;
+      }).join('');
+
+      const garnishNames = (currentOrder.garnishes || []).map((gId) => {
+        const g = getGarnishById(gId);
+        return `${g.emoji} ${g.name}`;
+      });
+      document.getElementById('spec-garnishes').textContent = garnishNames.length > 0 ? garnishNames.join(', ') : 'None';
+      document.getElementById('spec-instructions').textContent = currentOrder.instructions || '';
+    }
+
+    // =========================================================================
+    // 6. WORKSTATION CONTROLS & 5-STEP NAVIGATION
+    // =========================================================================
+    function setActiveStep(step) {
+      activeStep = Math.max(1, Math.min(5, step));
+
+      for (let i = 1; i <= 5; i++) {
+        const tab = document.getElementById(`step-tab-${i}`);
+        const panel = document.getElementById(`step-panel-${i}`);
+        if (i === activeStep) {
+          tab.className = 'step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#40C4C6] text-[#242424] shadow-md';
+          panel.classList.remove('hidden');
+        } else {
+          tab.className = 'step-tab min-h-[48px] sm:min-h-[52px] py-2 px-1 sm:px-2 rounded-xl text-[11px] sm:text-xs font-bold transition flex flex-col items-center justify-center gap-0.5 bg-[#242424] text-white/75 hover:text-white';
+          panel.classList.add('hidden');
+        }
+      }
+
+      document.getElementById('btn-prev-step').disabled = activeStep === 1;
+      document.getElementById('btn-next-step').disabled = activeStep === 5;
+    }
+
+    function changeStep(delta) {
+      setActiveStep(activeStep + delta);
+    }
+
+    function renderWorkstationControls() {
+      renderGlasswareOptions();
+      renderIceOptions();
+      renderJiggerButtons();
+      renderIngredientButtons();
+      renderTechniqueOptions();
+      renderGarnishOptions();
+      updatePoursSummary();
+      renderCocktailSvg();
+    }
+
+    function renderGlasswareOptions() {
+      const grid = document.getElementById('glassware-grid');
+      if (!grid) return;
+      grid.innerHTML = GLASSWARE_OPTIONS.map((g) => {
+        const selected = playerBuild.glass === g.id;
+        return `
+          <button
+            type="button"
+            onclick="selectGlass('${g.id}')"
+            class="min-h-[64px] p-3.5 rounded-xl border text-left transition active:scale-95 ${
+              selected
+                ? 'bg-[#40C4C6]/15 border-[#40C4C6] text-white shadow-md'
+                : 'bg-[#242424] border-white/10 text-white/80 hover:border-white/30'
+            }"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs sm:text-sm font-extrabold">${escapeHtml(g.name)}</span>
+              ${selected ? '<span class="w-2.5 h-2.5 rounded-full bg-[#40C4C6] shrink-0"></span>' : ''}
+            </div>
+            <span class="block text-[11px] text-white/55 mt-1">${escapeHtml(g.subtitle)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectGlass(glassId) {
+      playerBuild.glass = glassId;
+      renderGlasswareOptions();
+      renderCocktailSvg();
+    }
+
+    function renderIceOptions() {
+      const grid = document.getElementById('ice-grid');
+      if (!grid) return;
+      grid.innerHTML = ICE_OPTIONS.map((ice) => {
+        const selected = playerBuild.ice === ice.id;
+        return `
+          <button
+            type="button"
+            onclick="selectIce('${ice.id}')"
+            class="min-h-[68px] p-3.5 rounded-xl border text-left transition active:scale-95 ${
+              selected
+                ? 'bg-[#40C4C6]/15 border-[#40C4C6] text-white shadow-md'
+                : 'bg-[#242424] border-white/10 text-white/80 hover:border-white/30'
+            }"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs sm:text-sm font-extrabold">${escapeHtml(ice.name)}</span>
+              ${selected ? '<span class="w-2.5 h-2.5 rounded-full bg-[#40C4C6] shrink-0"></span>' : ''}
+            </div>
+            <span class="block text-[11px] text-white/55 mt-1">${escapeHtml(ice.subtitle)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectIce(iceId) {
+      playerBuild.ice = iceId;
+      renderIceOptions();
+      renderCocktailSvg();
+    }
+
+    function togglePourMode() {
+      isExactPourMode = !isExactPourMode;
+      const btn = document.getElementById('btn-pour-mode');
+      const jiggerBar = document.getElementById('jigger-selector-bar');
+      if (isExactPourMode) {
+        btn.textContent = 'Mode: Auto-Recipe Pour';
+        jiggerBar.classList.add('opacity-45', 'pointer-events-none');
+      } else {
+        btn.textContent = 'Mode: Manual Jigger (cl)';
+        jiggerBar.classList.remove('opacity-45', 'pointer-events-none');
+      }
+      renderIngredientButtons();
+    }
+
+    function renderJiggerButtons() {
+      const container = document.getElementById('jigger-buttons');
+      if (!container) return;
+      container.innerHTML = JIGGER_INCREMENTS.map((vol) => {
+        const active = selectedJiggerVolume === vol;
+        return `
+          <button
+            type="button"
+            onclick="selectJiggerVolume(${vol})"
+            class="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-extrabold transition active:scale-95 ${
+              active
+                ? 'bg-[#40C4C6] text-[#242424]'
+                : 'bg-[#191919] text-white/80 hover:text-white border border-white/10'
+            }"
+          >
+            ${vol} cl
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectJiggerVolume(vol) {
+      selectedJiggerVolume = vol;
+      renderJiggerButtons();
+      renderIngredientButtons();
+    }
+
+    function setIngredientCategory(category) {
+      activeIngredientCategory = category;
+      INGREDIENT_CATEGORIES.forEach((cat) => {
+        const tab = document.getElementById(`cat-tab-${cat}`);
+        if (!tab) return;
+        const spanClass = cat === 'Specials' ? 'col-span-2 sm:col-span-1 ' : '';
+        if (cat === category) {
+          tab.className = `ing-cat-tab ${spanClass}min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#40C4C6] text-[#242424] transition truncate`;
+        } else {
+          tab.className = `ing-cat-tab ${spanClass}min-h-[42px] px-2.5 sm:px-3 py-2 rounded-xl text-xs md:text-sm font-bold bg-[#242424] text-white/75 hover:text-white transition truncate`;
+        }
+      });
+      renderIngredientButtons();
+    }
+
+    function renderIngredientButtons() {
+      const grid = document.getElementById('ingredients-grid');
+      if (!grid) return;
+
+      const filtered = ingredients.filter((i) => i.category === activeIngredientCategory);
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-[#242424] border border-dashed border-white/15 rounded-xl p-6 text-center">
+            <p class="text-xs font-bold text-white/75">No bottles in ${escapeHtml(activeIngredientCategory)} yet</p>
+            <p class="text-[11px] text-white/50 mt-1">Add items under Bartender's Codex &rarr; Ingredients.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((ing) => {
+        let pourLabel = `+${selectedJiggerVolume} cl`;
+        if (isExactPourMode && currentOrder) {
+          const targetItem = currentOrder.ingredients.find((item) => item.id === ing.id);
+          pourLabel = targetItem ? `Auto ${targetItem.amount} cl` : `+${selectedJiggerVolume} cl`;
+        }
+
+        return `
+          <button
+            type="button"
+            onclick="pourIngredient('${ing.id}')"
+            class="min-h-[56px] p-3 rounded-xl bg-[#242424] hover:bg-[#2e2e2e] border border-white/10 hover:border-[#40C4C6]/60 text-left transition active:scale-95 flex items-center justify-between gap-2"
+          >
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-3 h-3 rounded-full shrink-0 border border-white/20" style="background-color:${escapeHtml(ing.color)}"></span>
+              <span class="text-xs font-bold text-white leading-tight break-words">${escapeHtml(ing.name)}</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-[#191919] text-[#40C4C6] text-[11px] font-extrabold shrink-0">
+              ${pourLabel}
+            </span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function pourIngredient(ingId) {
+      let amountToAdd = selectedJiggerVolume;
+      if (isExactPourMode && currentOrder) {
+        const targetItem = currentOrder.ingredients.find((item) => item.id === ingId);
+        if (targetItem) {
+          amountToAdd = targetItem.amount;
+        }
+      }
+
+      const existing = playerBuild.pours.find((p) => p.id === ingId);
+      if (existing) {
+        existing.amount = Math.round((existing.amount + amountToAdd) * 100) / 100;
+      } else {
+        playerBuild.pours.push({ id: ingId, amount: amountToAdd });
+      }
+
+      updatePoursSummary();
+      renderCocktailSvg();
+    }
+
+    function undoLastPour() {
+      if (playerBuild.pours.length === 0) return;
+      playerBuild.pours.pop();
+      updatePoursSummary();
+      renderCocktailSvg();
+    }
+
+    function resetCurrentBuild(silent = false) {
+      playerBuild = {
+        glass: 'rocks',
+        ice: 'cubed',
+        pours: [],
+        technique: null,
+        garnishes: []
+      };
+      setActiveStep(1);
+      renderWorkstationControls();
+      if (!silent) {
+        showToast('Glass emptied and reset');
+      }
+    }
+
+    function updatePoursSummary() {
+      const listEl = document.getElementById('current-pours-list');
+      const volBadge = document.getElementById('live-volume-badge');
+      const totalCl = playerBuild.pours.reduce((sum, p) => sum + p.amount, 0);
+
+      if (volBadge) {
+        volBadge.textContent = `${totalCl.toFixed(1)} cl poured`;
+      }
+
+      if (!listEl) return;
+      if (playerBuild.pours.length === 0) {
+        listEl.innerHTML = `<span class="text-xs text-white/40 italic">Glass is currently empty</span>`;
+        return;
+      }
+
+      listEl.innerHTML = playerBuild.pours.map((p) => {
+        const info = getIngredientById(p.id);
+        return `
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#242424] border border-white/10 text-[11px] font-semibold text-white">
+            <span class="w-2 h-2 rounded-full" style="background-color:${escapeHtml(info.color)}"></span>
+            <span>${escapeHtml(info.name)}</span>
+            <strong class="text-[#40C4C6]">${p.amount}cl</strong>
+          </span>
+        `;
+      }).join('');
+    }
+
+    function renderTechniqueOptions() {
+      const grid = document.getElementById('technique-grid');
+      if (!grid) return;
+      grid.innerHTML = TECHNIQUE_OPTIONS.map((tech) => {
+        const selected = playerBuild.technique === tech.id;
+        return `
+          <button
+            type="button"
+            onclick="selectTechnique('${tech.id}')"
+            class="min-h-[72px] p-4 rounded-xl border text-left transition active:scale-95 ${
+              selected
+                ? 'bg-[#40C4C6]/15 border-[#40C4C6] text-white shadow-md'
+                : 'bg-[#242424] border-white/10 text-white/80 hover:border-white/30'
+            }"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs sm:text-sm font-extrabold">${escapeHtml(tech.name)}</span>
+              ${selected ? '<span class="w-2.5 h-2.5 rounded-full bg-[#40C4C6] shrink-0"></span>' : ''}
+            </div>
+            <span class="block text-[11px] text-white/55 mt-1">${escapeHtml(tech.subtitle)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectTechnique(techId) {
+      playerBuild.technique = techId;
+      renderTechniqueOptions();
+
+      const svg = document.getElementById('cocktail-svg');
+      const spoon = document.getElementById('svg-barspoon');
+
+      if (techId === 'shake' || techId === 'shake_double') {
+        svg.classList.remove('animate-shake-vessel');
+        void svg.offsetWidth;
+        svg.classList.add('animate-shake-vessel');
+        setTimeout(() => svg.classList.remove('animate-shake-vessel'), 700);
+      } else if (techId === 'stir') {
+        spoon.classList.remove('hidden');
+        spoon.classList.remove('animate-stir-spoon');
+        void spoon.offsetWidth;
+        spoon.classList.add('animate-stir-spoon');
+        setTimeout(() => {
+          spoon.classList.add('hidden');
+          spoon.classList.remove('animate-stir-spoon');
+        }, 1150);
+      }
+
+      renderCocktailSvg();
+    }
+
+    function renderGarnishOptions() {
+      const grid = document.getElementById('garnishes-grid');
+      const countBadge = document.getElementById('selected-garnish-count');
+      if (countBadge) {
+        countBadge.textContent = `${playerBuild.garnishes.length} selected`;
+      }
+      if (!grid) return;
+
+      grid.innerHTML = garnishes.map((g) => {
+        const selected = playerBuild.garnishes.includes(g.id);
+        return `
+          <button
+            type="button"
+            onclick="toggleBuildGarnish('${g.id}')"
+            class="min-h-[54px] p-3 rounded-xl border text-left transition active:scale-95 flex items-center justify-between gap-2 ${
+              selected
+                ? 'bg-[#40C4C6]/15 border-[#40C4C6] text-white'
+                : 'bg-[#242424] border-white/10 text-white/80 hover:border-white/30'
+            }"
+          >
+            <span class="flex items-center gap-2 text-xs font-bold">
+              <span class="text-base">${escapeHtml(g.emoji)}</span>
+              <span>${escapeHtml(g.name)}</span>
+            </span>
+            ${selected ? '<span class="text-[#40C4C6] font-extrabold text-xs">&#10003;</span>' : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleBuildGarnish(garnishId) {
+      const idx = playerBuild.garnishes.indexOf(garnishId);
+      if (idx >= 0) {
+        playerBuild.garnishes.splice(idx, 1);
+      } else {
+        playerBuild.garnishes.push(garnishId);
+      }
+      renderGarnishOptions();
+      renderCocktailSvg();
+    }
+
+    // =========================================================================
+    // 7. LIVE SVG VESSEL, LIQUID, ICE & GARNISH RENDERER
+    // =========================================================================
+    function renderCocktailSvg() {
+      const contentsGroup = document.getElementById('svg-glass-contents');
+      const liquidGroup = document.getElementById('svg-liquid-layers');
+      const iceGroup = document.getElementById('svg-ice-layer');
+      const outlineGroup = document.getElementById('svg-glass-outline');
+      const garnishGroup = document.getElementById('svg-garnish-layer');
+
+      if (!contentsGroup || !liquidGroup || !iceGroup || !outlineGroup || !garnishGroup) return;
+
+      const glass = playerBuild.glass || 'rocks';
+      contentsGroup.setAttribute('clip-path', `url(#clip-${glass})`);
+
+      // Vessel bounds for liquid fill calculation
+      const boundsMap = {
+        rocks: { top: 98, bottom: 260, rimY: 95, rimLeft: 82, rimRight: 218 },
+        highball: { top: 60, bottom: 272, rimY: 55, rimLeft: 98, rimRight: 202 },
+        coupe: { top: 88, bottom: 160, rimY: 85, rimLeft: 62, rimRight: 238 },
+        hurricane: { top: 62, bottom: 240, rimY: 55, rimLeft: 102, rimRight: 198 },
+        red_wine: { top: 64, bottom: 174, rimY: 58, rimLeft: 96, rimRight: 204 },
+        white_wine: { top: 70, bottom: 164, rimY: 64, rimLeft: 106, rimRight: 194 },
+        flute: { top: 50, bottom: 176, rimY: 44, rimLeft: 124, rimRight: 176 },
+        mule: { top: 86, bottom: 256, rimY: 82, rimLeft: 94, rimRight: 206 },
+        tiki: { top: 68, bottom: 264, rimY: 62, rimLeft: 98, rimRight: 202 }
+      };
+      const bounds = boundsMap[glass] || boundsMap.rocks;
+      const maxHeight = bounds.bottom - bounds.top;
+
+      // Render Liquid Layers
+      const totalCl = playerBuild.pours.reduce((sum, p) => sum + p.amount, 0);
+      const scaleMaxCl = Math.max(16, totalCl);
+      const fillRatio = Math.min(0.95, totalCl / scaleMaxCl);
+      const totalFillPx = maxHeight * fillRatio;
+
+      let currentBottomY = bounds.bottom;
+      const isBlended = playerBuild.technique === 'shake' || playerBuild.technique === 'shake_double' || playerBuild.technique === 'stir';
+
+      if (playerBuild.pours.length === 0) {
+        liquidGroup.innerHTML = '';
+      } else if (isBlended) {
+        const lastPour = playerBuild.pours[playerBuild.pours.length - 1];
+        const blendedColor = getIngredientById(lastPour.id).color;
+        const yTop = bounds.bottom - totalFillPx;
+        liquidGroup.innerHTML = `
+          <rect x="40" y="${yTop}" width="220" height="${totalFillPx + 10}" fill="${escapeHtml(blendedColor)}" fill-opacity="0.88" class="liquid-layer" />
+          <line x1="40" y1="${yTop}" x2="260" y2="${yTop}" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2" />
+        `;
+      } else {
+        liquidGroup.innerHTML = playerBuild.pours.map((pour) => {
+          const info = getIngredientById(pour.id);
+          const layerH = (pour.amount / Math.max(0.1, totalCl)) * totalFillPx;
+          const yTop = currentBottomY - layerH;
+          currentBottomY = yTop;
+          return `<rect x="40" y="${yTop}" width="220" height="${layerH + 1}" fill="${escapeHtml(info.color)}" fill-opacity="0.88" class="liquid-layer" />`;
+        }).join('');
+      }
+
+      // Render Ice
+      if (playerBuild.ice === 'none') {
+        iceGroup.innerHTML = '';
+      } else if (playerBuild.ice === 'cubed') {
+        const midY = (bounds.top + bounds.bottom) / 2;
+        iceGroup.innerHTML = `
+          <rect x="115" y="${midY - 26}" width="32" height="32" rx="6" transform="rotate(-10 131 ${midY - 10})" fill="#FFFFFF" fill-opacity="0.28" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1.5" />
+          <rect x="150" y="${midY - 18}" width="32" height="32" rx="6" transform="rotate(12 166 ${midY - 2})" fill="#FFFFFF" fill-opacity="0.25" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.5" />
+          <rect x="128" y="${midY + 8}" width="32" height="32" rx="6" transform="rotate(4 144 ${midY + 24})" fill="#FFFFFF" fill-opacity="0.22" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1.5" />
+        `;
+      } else if (playerBuild.ice === 'crushed') {
+        const pebbles = [];
+        for (let row = 0; row < 4; row++) {
+          for (let col = 0; col < 5; col++) {
+            const px = 104 + col * 18 + (row % 2) * 6;
+            const py = bounds.bottom - 18 - row * 16;
+            pebbles.push(`<polygon points="${px},${py} ${px + 10},${py - 5} ${px + 14},${py + 6} ${px + 3},${py + 9}" fill="#FFFFFF" fill-opacity="0.32" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1" />`);
+          }
+        }
+        iceGroup.innerHTML = pebbles.join('');
+      }
+
+      // Render Vessel Outline
+      const outlines = {
+        rocks: `
+          <path d="M82 95 L218 95 L204 252 Q203 262 193 262 L107 262 Q97 262 96 252 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="3" />
+          <line x1="98" y1="248" x2="202" y2="248" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="2" />
+        `,
+        highball: `
+          <path d="M98 55 L202 55 L194 265 Q193 274 184 274 L116 274 Q107 274 106 265 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="3" />
+          <line x1="108" y1="260" x2="192" y2="260" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="2" />
+        `,
+        coupe: `
+          <path d="M62 85 Q62 162 150 162 Q238 162 238 85 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+          <line x1="150" y1="162" x2="150" y2="262" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="4" />
+          <ellipse cx="150" cy="264" rx="46" ry="7" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+        `,
+        hurricane: `
+          <path d="M102 55 C86 95, 84 140, 108 175 C124 198, 122 222, 108 242 L192 242 C178 222, 176 198, 192 175 C216 140, 214 95, 198 55 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+          <line x1="150" y1="242" x2="150" y2="266" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="4" />
+          <ellipse cx="150" cy="268" rx="44" ry="7" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+        `,
+        red_wine: `
+          <path d="M96 58 C84 108, 84 176, 150 176 C216 176, 216 108, 204 58 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+          <line x1="150" y1="176" x2="150" y2="264" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3.5" />
+          <ellipse cx="150" cy="266" rx="44" ry="7" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+        `,
+        white_wine: `
+          <path d="M106 64 C98 108, 100 166, 150 166 C200 166, 202 108, 194 64 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+          <line x1="150" y1="166" x2="150" y2="264" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3.5" />
+          <ellipse cx="150" cy="266" rx="42" ry="7" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="3" />
+        `,
+        flute: `
+          <path d="M124 44 L176 44 L170 168 Q169 178 150 178 Q131 178 130 168 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.82" stroke-width="3" />
+          <line x1="150" y1="178" x2="150" y2="264" stroke="#FFFFFF" stroke-opacity="0.82" stroke-width="3.5" />
+          <ellipse cx="150" cy="266" rx="38" ry="6.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.82" stroke-width="3" />
+        `,
+        mule: `
+          <path d="M94 82 L206 82 L202 246 Q201 258 188 258 L112 258 Q99 258 98 246 Z" fill="#D97A4A" fill-opacity="0.16" stroke="#E59866" stroke-width="3.5" />
+          <path d="M205 106 C236 106, 236 218, 203 218" fill="none" stroke="#E59866" stroke-width="4" stroke-linecap="round" />
+          <line x1="94" y1="88" x2="206" y2="88" stroke="#F5CBA7" stroke-width="2" />
+        `,
+        tiki: `
+          <path d="M98 62 L202 62 L196 256 Q195 266 184 266 L116 266 Q105 266 104 256 Z" fill="#8E6E53" fill-opacity="0.18" stroke="#D4AC6E" stroke-width="3.5" />
+          <path d="M114 115 L140 125 L114 135 M186 115 L160 125 L186 135" fill="none" stroke="#D4AC6E" stroke-opacity="0.65" stroke-width="2.2" />
+          <rect x="122" y="168" width="56" height="22" rx="6" fill="none" stroke="#D4AC6E" stroke-opacity="0.65" stroke-width="2.2" />
+        `
+      };
+      outlineGroup.innerHTML = outlines[glass] || outlines.rocks;
+
+      // Render Garnishes on Rim
+      if (playerBuild.garnishes.length === 0) {
+        garnishGroup.innerHTML = '';
+      } else {
+        garnishGroup.innerHTML = playerBuild.garnishes.map((gId, idx) => {
+          const g = getGarnishById(gId);
+          const gx = bounds.rimRight - 14 - idx * 28;
+          const gy = bounds.rimY - 4;
+          return `<text x="${gx}" y="${gy}" font-size="24" text-anchor="middle">${escapeHtml(g.emoji)}</text>`;
+        }).join('');
+      }
+    }
+
+    // =========================================================================
+    // 8. COCKTAIL EVALUATION ENGINE
+    // =========================================================================
+    function serveCocktail() {
+      if (!currentOrder) return;
+      stopMemoryCountdown();
+
+      const checks = [];
+      let earnedPoints = 0;
+      let maxPoints = 0;
+
+      // 1. Glassware (20 pts)
+      maxPoints += 20;
+      const glassOk = playerBuild.glass === currentOrder.glass;
+      if (glassOk) earnedPoints += 20;
+      checks.push({
+        label: 'Glassware',
+        ok: glassOk,
+        detail: glassOk
+          ? getGlassLabel(currentOrder.glass)
+          : `Expected ${getGlassLabel(currentOrder.glass)}, got ${getGlassLabel(playerBuild.glass)}`
+      });
+
+      // 2. Ice Type (15 pts)
+      maxPoints += 15;
+      const iceOk = playerBuild.ice === currentOrder.ice;
+      if (iceOk) earnedPoints += 15;
+      checks.push({
+        label: 'Ice Type',
+        ok: iceOk,
+        detail: iceOk
+          ? getIceLabel(currentOrder.ice)
+          : `Expected ${getIceLabel(currentOrder.ice)}, got ${getIceLabel(playerBuild.ice)}`
+      });
+
+      // 3. Technique (20 pts)
+      maxPoints += 20;
+      const techOk = playerBuild.technique === currentOrder.technique;
+      if (techOk) earnedPoints += 20;
+      checks.push({
+        label: 'Technique',
+        ok: techOk,
+        detail: techOk
+          ? getTechniqueLabel(currentOrder.technique)
+          : `Expected ${getTechniqueLabel(currentOrder.technique)}, got ${getTechniqueLabel(playerBuild.technique)}`
+      });
+
+      // 4. Ingredients & Volumes (30 pts)
+      maxPoints += 30;
+      const targetIngs = currentOrder.ingredients || [];
+      const playerIngs = playerBuild.pours || [];
+      let ingScore = 0;
+      const perIngPoints = targetIngs.length > 0 ? 30 / targetIngs.length : 30;
+      const ingNotes = [];
+
+      targetIngs.forEach((tItem) => {
+        const info = getIngredientById(tItem.id);
+        const found = playerIngs.find((p) => p.id === tItem.id);
+        if (!found) {
+          ingNotes.push(`Missing ${info.name} (${tItem.amount} cl)`);
+        } else if (Math.abs(found.amount - tItem.amount) <= 0.25) {
+          ingScore += perIngPoints;
+          ingNotes.push(`${info.name}: ${found.amount} cl ✓`);
+        } else {
+          ingScore += perIngPoints * 0.5;
+          ingNotes.push(`${info.name}: poured ${found.amount} cl (target ${tItem.amount} cl)`);
+        }
+      });
+
+      const extraPours = playerIngs.filter((p) => !targetIngs.some((t) => t.id === p.id));
+      if (extraPours.length > 0) {
+        ingScore = Math.max(0, ingScore - extraPours.length * 5);
+        extraPours.forEach((ep) => {
+          ingNotes.push(`Extra: ${getIngredientById(ep.id).name} (${ep.amount} cl)`);
+        });
+      }
+
+      earnedPoints += ingScore;
+      const allIngsPerfect = Math.round(ingScore) === 30 && extraPours.length === 0;
+      checks.push({
+        label: 'Ingredients & Proportions',
+        ok: allIngsPerfect,
+        detail: ingNotes.join(' • ')
+      });
+
+      // 5. Garnishes (15 pts)
+      maxPoints += 15;
+      const targetGars = [...(currentOrder.garnishes || [])].sort();
+      const playerGars = [...(playerBuild.garnishes || [])].sort();
+      const garnishOk = JSON.stringify(targetGars) === JSON.stringify(playerGars);
+      if (garnishOk) earnedPoints += 15;
+      const expectedGarNames = targetGars.map((id) => getGarnishById(id).name).join(', ') || 'None';
+      checks.push({
+        label: 'Garnish',
+        ok: garnishOk,
+        detail: garnishOk ? expectedGarNames : `Expected: ${expectedGarNames}`
+      });
+
+      const accuracy = Math.round((earnedPoints / maxPoints) * 100);
+
+      // Populate Evaluation Modal
+      document.getElementById('eval-title').textContent = currentOrder.name;
+      document.getElementById('eval-score-percent').textContent = `${accuracy}%`;
+      const badge = document.getElementById('eval-badge');
+      if (accuracy === 100) {
+        badge.textContent = 'Master Barchef Serve!';
+        badge.className = 'inline-block px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-[#40C4C6]/20 text-[#40C4C6] uppercase tracking-wider';
+      } else if (accuracy >= 80) {
+        badge.textContent = 'Solid Serve';
+        badge.className = 'inline-block px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-400/20 text-amber-300 uppercase tracking-wider';
+      } else {
+        badge.textContent = 'Needs Practice';
+        badge.className = 'inline-block px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-red-500/20 text-red-300 uppercase tracking-wider';
+      }
+
+      document.getElementById('eval-breakdown').innerHTML = checks.map((c) => `
+        <div class="p-3 rounded-xl bg-[#242424] border ${c.ok ? 'border-[#40C4C6]/40' : 'border-red-500/40'} flex items-start justify-between gap-3">
+          <div>
+            <span class="block text-xs font-extrabold text-white">${escapeHtml(c.label)}</span>
+            <span class="block text-[11px] text-white/70 mt-0.5">${escapeHtml(c.detail)}</span>
+          </div>
+          <span class="text-sm font-extrabold ${c.ok ? 'text-[#40C4C6]' : 'text-red-400'}">${c.ok ? '✓' : '✕'}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('eval-instructions').textContent = currentOrder.instructions || '';
+      document.getElementById('eval-modal').classList.remove('hidden');
+    }
+
+    function retryCurrentOrder() {
+      document.getElementById('eval-modal').classList.add('hidden');
+      resetCurrentBuild(true);
+      if (gameMode === 'memory') {
+        startMemoryCountdown();
+      }
+    }
+
+    function closeEvalAndNextOrder() {
+      document.getElementById('eval-modal').classList.add('hidden');
+      startNewOrder(currentOrder ? currentOrder.id : null);
+    }
+
+    // =========================================================================
+    // 9. BARTENDER'S CODEX, LIVE SEARCH & ADMIN PIN AUTHORIZATION
+    // =========================================================================
+    function openCodexModal() {
+      document.getElementById('codex-modal').classList.remove('hidden');
+      updateAdminUiState();
+      setCodexTab(activeCodexTab);
+    }
+
+    function closeCodexModal() {
+      document.getElementById('codex-modal').classList.add('hidden');
+    }
+
+    function updateSearchInputPlaceholder() {
+      const input = document.getElementById('codex-search-input');
+      if (!input) return;
+      if (activeCodexTab === 'recipes') {
+        input.placeholder = 'Search recipes across all folders by name, ingredient, glass, technique, or garnish...';
+      } else if (activeCodexTab === 'ingredients') {
+        input.placeholder = 'Search ingredients by name or category (Spirits, Liquors, Syrups, Juices/Soda, Specials)...';
+      } else {
+        input.placeholder = 'Search garnishes by name or emoji...';
+      }
+    }
+
+    function handleCodexSearch(val) {
+      codexSearchQuery = String(val ?? '');
+      const clearBtn = document.getElementById('btn-clear-codex-search');
+      if (clearBtn) {
+        if (codexSearchQuery.trim().length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+      }
+      refreshActiveCodexTab();
+    }
+
+    function clearCodexSearch() {
+      codexSearchQuery = '';
+      const input = document.getElementById('codex-search-input');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      const clearBtn = document.getElementById('btn-clear-codex-search');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      refreshActiveCodexTab();
+    }
+
+    function updateSearchMatchBadge(matchedCount, totalCount) {
+      const badge = document.getElementById('codex-search-count');
+      if (!badge) return;
+      if (codexSearchQuery.trim().length > 0) {
+        badge.textContent = `${matchedCount} / ${totalCount}`;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function handleAdminToggle() {
+      if (isAdminUnlocked) {
+        isAdminUnlocked = false;
+        updateAdminUiState();
+        refreshActiveCodexTab();
+        showToast('Admin Mode locked');
+      } else {
+        promptAdminPin(() => {
+          updateAdminUiState();
+          refreshActiveCodexTab();
+        });
+      }
+    }
+
+    function promptAdminPin(onSuccess) {
+      pendingPinSuccessCallback = onSuccess || null;
+      const input = document.getElementById('pin-input');
+      const err = document.getElementById('pin-error-msg');
+      input.value = '';
+      err.classList.add('hidden');
+      document.getElementById('pin-modal').classList.remove('hidden');
+      setTimeout(() => input.focus(), 60);
+    }
+
+    function closePinModal() {
+      document.getElementById('pin-modal').classList.add('hidden');
+      pendingPinSuccessCallback = null;
+    }
+
+    function verifyAdminPin() {
+      const input = document.getElementById('pin-input');
+      const err = document.getElementById('pin-error-msg');
+      if (input.value.trim() === ADMIN_PIN) {
+        isAdminUnlocked = true;
+        document.getElementById('pin-modal').classList.add('hidden');
+        updateAdminUiState();
+        showToast('Admin Mode unlocked', 'success');
+        if (typeof pendingPinSuccessCallback === 'function') {
+          const cb = pendingPinSuccessCallback;
+          pendingPinSuccessCallback = null;
+          cb();
+        }
+      } else {
+        err.classList.remove('hidden');
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    function updateAdminUiState() {
+      const btn = document.getElementById('btn-admin-status');
+      const icon = document.getElementById('admin-lock-icon');
+      const text = document.getElementById('admin-status-text');
+      const recipeActions = document.getElementById('codex-admin-recipe-actions');
+
+      if (isAdminUnlocked) {
+        btn.className = 'min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-extrabold border transition flex items-center justify-center gap-1.5 sm:gap-2 bg-[#40C4C6]/20 border-[#40C4C6] text-[#40C4C6]';
+        icon.innerHTML = '&#128275;';
+        text.textContent = 'Admin Unlocked';
+        if (activeCodexTab === 'recipes') {
+          recipeActions.classList.remove('hidden');
+        }
+      } else {
+        btn.className = 'min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs md:text-sm font-bold border transition flex items-center justify-center gap-1.5 sm:gap-2 bg-[#191919] border-white/15 text-white/80 hover:border-[#40C4C6]';
+        icon.innerHTML = '&#128274;';
+        text.textContent = 'Admin';
+        recipeActions.classList.add('hidden');
+      }
+    }
+
+    function setCodexTab(tab) {
+      activeCodexTab = tab;
+      ['recipes', 'ingredients', 'garnishes'].forEach((t) => {
+        const btn = document.getElementById(`codex-tab-${t}`);
+        const panel = document.getElementById(`codex-panel-${t}`);
+        if (t === tab) {
+          btn.className = 'min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-t-xl text-[11px] sm:text-xs md:text-sm font-bold border-b-2 border-[#40C4C6] text-[#40C4C6] bg-[#242424] truncate';
+          panel.classList.remove('hidden');
+        } else {
+          btn.className = 'min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-4 py-2 rounded-t-xl text-[11px] sm:text-xs md:text-sm font-bold border-b-2 border-transparent text-white/65 hover:text-white truncate';
+          panel.classList.add('hidden');
+        }
+      });
+
+      const recipeActions = document.getElementById('codex-admin-recipe-actions');
+      if (isAdminUnlocked && tab === 'recipes') {
+        recipeActions.classList.remove('hidden');
+      } else {
+        recipeActions.classList.add('hidden');
+      }
+
+      updateSearchInputPlaceholder();
+      refreshActiveCodexTab();
+    }
+
+    function refreshActiveCodexTab() {
+      document.getElementById('codex-tab-recipes').textContent = `Recipes (${recipes.length})`;
+      if (activeCodexTab === 'recipes') renderCodexRecipes();
+      if (activeCodexTab === 'ingredients') renderCodexIngredients();
+      if (activeCodexTab === 'garnishes') renderCodexGarnishes();
+    }
+
+    function setCodexFolder(folder) {
+      activeCodexFolder = folder;
+      const folderKeys = ['signature', 'classic', 'mocktails', 'aperitif'];
+
+      folderKeys.forEach((key) => {
+        const btn = document.getElementById(`folder-btn-${key}`);
+        const icon = document.getElementById(`folder-icon-${key}`);
+        const countBadge = document.getElementById(`folder-count-${key}`);
+        if (!btn || !icon || !countBadge) return;
+
+        if (key === folder) {
+          btn.className = 'p-3.5 rounded-2xl border text-left transition flex items-center justify-between gap-2.5 bg-[#191919] border-[#40C4C6] text-white';
+          icon.className = 'w-9 h-9 rounded-xl bg-[#40C4C6]/20 text-[#40C4C6] flex items-center justify-center shrink-0';
+          countBadge.className = 'px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#191919] text-[#40C4C6] border border-[#40C4C6]/40 shrink-0';
+        } else {
+          btn.className = 'p-3.5 rounded-2xl border text-left transition flex items-center justify-between gap-2.5 bg-[#191919] border-white/10 text-white/75 hover:border-white/30';
+          icon.className = 'w-9 h-9 rounded-xl bg-[#242424] text-white/70 flex items-center justify-center shrink-0';
+          countBadge.className = 'px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#242424] text-white/70 border border-white/10 shrink-0';
+        }
+      });
+
+      renderCodexRecipes();
+    }
+
+    function recipeMatchesQuery(rec, q) {
+      if (!q) return true;
+      const nameMatch = (rec.name || '').toLowerCase().includes(q);
+      const folderMatch = getFolderLabel(rec.folder || 'signature').toLowerCase().includes(q);
+      const glassMatch = getGlassLabel(rec.glass).toLowerCase().includes(q);
+      const iceMatch = getIceLabel(rec.ice).toLowerCase().includes(q);
+      const techMatch = getTechniqueLabel(rec.technique).toLowerCase().includes(q);
+      const instrMatch = (rec.instructions || '').toLowerCase().includes(q);
+      const ingMatch = (rec.ingredients || []).some((item) =>
+        getIngredientById(item.id).name.toLowerCase().includes(q)
+      );
+      const garMatch = (rec.garnishes || []).some((gId) =>
+        getGarnishById(gId).name.toLowerCase().includes(q)
+      );
+      return nameMatch || folderMatch || glassMatch || iceMatch || techMatch || instrMatch || ingMatch || garMatch;
+    }
+
+    function renderCodexRecipes() {
+      const sigCount = recipes.filter((r) => (r.folder || 'signature') === 'signature').length;
+      const clsCount = recipes.filter((r) => (r.folder || 'signature') === 'classic').length;
+      const mockCount = recipes.filter((r) => (r.folder || 'signature') === 'mocktails').length;
+      const aperCount = recipes.filter((r) => (r.folder || 'signature') === 'aperitif').length;
+
+      document.getElementById('folder-count-signature').textContent = String(sigCount);
+      document.getElementById('folder-count-classic').textContent = String(clsCount);
+      document.getElementById('folder-count-mocktails').textContent = String(mockCount);
+      document.getElementById('folder-count-aperitif').textContent = String(aperCount);
+
+      const grid = document.getElementById('codex-recipes-grid');
+      const foldersBar = document.getElementById('codex-folders-bar');
+      const searchBanner = document.getElementById('codex-search-banner');
+      const searchBannerText = document.getElementById('codex-search-banner-text');
+
+      const q = codexSearchQuery.trim().toLowerCase();
+      const isSearching = q.length > 0;
+
+      let list = [];
+      if (isSearching) {
+        foldersBar.classList.add('hidden');
+        searchBanner.classList.remove('hidden');
+        list = recipes.filter((r) => recipeMatchesQuery(r, q));
+        searchBannerText.textContent = `Showing ${list.length} matching recipe${list.length === 1 ? '' : 's'} across all folders for "${codexSearchQuery.trim()}"`;
+        updateSearchMatchBadge(list.length, recipes.length);
+      } else {
+        foldersBar.classList.remove('hidden');
+        searchBanner.classList.add('hidden');
+        list = recipes.filter((r) => (r.folder || 'signature') === activeCodexFolder);
+        updateSearchMatchBadge(list.length, recipes.length);
+      }
+
+      if (list.length === 0) {
+        if (isSearching) {
+          grid.innerHTML = `
+            <div class="col-span-full bg-[#191919] border border-dashed border-white/15 rounded-2xl p-8 text-center space-y-2.5">
+              <p class="text-sm font-bold text-white">No cocktails matched "${escapeHtml(codexSearchQuery.trim())}"</p>
+              <p class="text-xs text-white/55">Try searching by another drink name, spirit, syrup, glassware, or garnish.</p>
+              <button
+                type="button"
+                onclick="clearCodexSearch()"
+                class="mt-1 px-4 py-2 rounded-xl text-xs font-extrabold bg-[#40C4C6] text-[#242424] hover:bg-[#32a3a5] transition"
+              >
+                Clear Search
+              </button>
+            </div>
+          `;
+        } else {
+          grid.innerHTML = `
+            <div class="col-span-full bg-[#191919] border border-dashed border-white/15 rounded-2xl p-8 text-center space-y-2">
+              <p class="text-sm font-bold text-white">No cocktails in ${escapeHtml(getFolderLabel(activeCodexFolder))} yet</p>
+              <p class="text-xs text-white/55">Unlock Admin Mode to add recipes to ${escapeHtml(getFolderLabel(activeCodexFolder))}.</p>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      grid.innerHTML = list.map((rec) => {
+        const ingRows = (rec.ingredients || []).map((item) => {
+          const info = getIngredientById(item.id);
+          return `<li class="flex items-center justify-between text-xs text-white/80"><span>${escapeHtml(info.name)}</span><strong class="text-[#40C4C6]">${item.amount} cl</strong></li>`;
+        }).join('');
+
+        const garLabels = (rec.garnishes || []).map((gId) => {
+          const g = getGarnishById(gId);
+          return `${g.emoji} ${g.name}`;
+        }).join(', ') || 'None';
+
+        const folderBadge = isSearching
+          ? `<span class="px-2 py-0.5 rounded-md bg-white/10 text-white/75 text-[10px] font-bold uppercase tracking-wider">${escapeHtml(getFolderLabel(rec.folder || 'signature', true))}</span>`
+          : '';
+
+        return `
+          <div class="bg-[#191919] border border-white/10 rounded-2xl p-4 flex flex-col justify-between gap-3 shadow-md">
+            <div class="space-y-3">
+              ${rec.photo ? `
+                <div onclick="openFullscreenPhoto('${escapeHtml(rec.photo)}', '${escapeHtml(rec.name)}')" class="relative group cursor-zoom-in rounded-xl overflow-hidden h-36 border border-white/10 bg-[#242424]">
+                  <img src="${escapeHtml(rec.photo)}" alt="${escapeHtml(rec.name)}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                  <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/75 text-[10px] font-bold text-white border border-white/15">Fullscreen</span>
+                </div>
+              ` : ''}
+
+              <div class="flex items-start justify-between gap-2">
+                <div class="min-w-0">
+                  ${folderBadge}
+                  <h3 class="text-base font-extrabold text-white leading-snug ${isSearching ? 'mt-1' : ''}">${escapeHtml(rec.name)}</h3>
+                </div>
+                <button
+                  type="button"
+                  onclick="handleEditRecipeClick('${rec.id}')"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#242424] hover:bg-[#40C4C6] text-white/80 hover:text-[#242424] border border-white/10 transition shrink-0"
+                >
+                  ${isAdminUnlocked ? 'Edit' : '🔒 Edit'}
+                </button>
+              </div>
+
+              <div class="flex flex-wrap gap-1.5 text-[11px] font-semibold">
+                <span class="px-2 py-0.5 rounded-md bg-[#242424] text-white/80">${escapeHtml(getGlassLabel(rec.glass))}</span>
+                <span class="px-2 py-0.5 rounded-md bg-[#242424] text-white/80">${escapeHtml(getIceLabel(rec.ice))}</span>
+                <span class="px-2 py-0.5 rounded-md bg-[#40C4C6]/15 text-[#40C4C6]">${escapeHtml(getTechniqueLabel(rec.technique))}</span>
+              </div>
+
+              <ul class="space-y-1 bg-[#242424] p-2.5 rounded-xl border border-white/5">
+                ${ingRows}
+              </ul>
+
+              <div class="text-[11px] text-white/75">
+                <span class="text-white/50 font-semibold">Garnish:</span> ${escapeHtml(garLabels)}
+              </div>
+
+              <p class="text-[11px] text-white/60 leading-relaxed">${escapeHtml(rec.instructions || '')}</p>
+            </div>
+
+            <button
+              type="button"
+              onclick="practiceSpecificRecipe('${rec.id}')"
+              class="w-full min-h-[40px] py-2 rounded-xl text-xs font-extrabold bg-[#242424] hover:bg-[#40C4C6] text-[#40C4C6] hover:text-[#242424] border border-[#40C4C6]/30 transition"
+            >
+              Practice This Drink
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function practiceSpecificRecipe(recipeId) {
+      const found = recipes.find((r) => r.id === recipeId);
+      if (!found) return;
+      closeCodexModal();
+      currentOrder = JSON.parse(JSON.stringify(found));
+      document.getElementById('target-drink-name').textContent = currentOrder.name;
+      renderOrderSpecCard();
+      resetCurrentBuild(true);
+      if (gameMode === 'memory') {
+        startMemoryCountdown();
+      }
+      showToast(`Loaded ${found.name}`);
+    }
+
+    // =========================================================================
+    // 10. RECIPE EDITOR (ADMIN PIN PROTECTED) & PHOTO HANDLING
+    // =========================================================================
+    function handleEditRecipeClick(recipeId) {
+      if (!isAdminUnlocked) {
+        promptAdminPin(() => openRecipeEditor(recipeId));
+      } else {
+        openRecipeEditor(recipeId);
+      }
+    }
+
+    function openAddRecipeModal() {
+      if (!isAdminUnlocked) {
+        promptAdminPin(() => openRecipeEditor(null));
+      } else {
+        openRecipeEditor(null);
+      }
+    }
+
+    function openRecipeEditor(recipeId) {
+      editingRecipeId = recipeId;
+      const isNew = !recipeId;
+      const rec = isNew
+        ? {
+            id: 'rec_' + Date.now(),
+            name: '',
+            folder: activeCodexFolder,
+            photo: '',
+            glass: 'coupe',
+            ice: 'none',
+            technique: 'shake',
+            ingredients: [{ id: ingredients[0]?.id || 'ing_gin', amount: 4 }],
+            garnishes: [],
+            instructions: ''
+          }
+        : JSON.parse(JSON.stringify(recipes.find((r) => r.id === recipeId)));
+
+      document.getElementById('editor-modal-title').textContent = isNew ? 'Add New Cocktail Recipe' : `Edit: ${rec.name}`;
+      document.getElementById('edit-drink-name').value = rec.name;
+      document.getElementById('edit-drink-folder').value = rec.folder || 'signature';
+      document.getElementById('edit-drink-instructions').value = rec.instructions || '';
+
+      // Populate Select Dropdowns
+      document.getElementById('edit-drink-glass').innerHTML = GLASSWARE_OPTIONS.map(
+        (g) => `<option value="${g.id}" ${rec.glass === g.id ? 'selected' : ''}>${escapeHtml(g.name)}</option>`
+      ).join('');
+
+      document.getElementById('edit-drink-ice').innerHTML = ICE_OPTIONS.map(
+        (i) => `<option value="${i.id}" ${rec.ice === i.id ? 'selected' : ''}>${escapeHtml(i.name)}</option>`
+      ).join('');
+
+      document.getElementById('edit-drink-technique').innerHTML = TECHNIQUE_OPTIONS.map(
+        (t) => `<option value="${t.id}" ${rec.technique === t.id ? 'selected' : ''}>${escapeHtml(t.name)}</option>`
+      ).join('');
+
+      // Photo Preview
+      setEditorPhotoState(rec.photo || '');
+      document.getElementById('edit-drink-photo-url').value = rec.photo && !rec.photo.startsWith('data:') ? rec.photo : '';
+      document.getElementById('edit-drink-photo-file').value = '';
+
+      // Ingredients & Garnishes
+      editorIngredientRows = rec.ingredients || [];
+      editorSelectedGarnishes = [...(rec.garnishes || [])];
+      renderEditorIngredientRows();
+      renderEditorGarnishButtons();
+
+      const delBtn = document.getElementById('btn-delete-recipe');
+      if (isNew) {
+        delBtn.classList.add('hidden');
+      } else {
+        delBtn.classList.remove('hidden');
+      }
+
+      document.getElementById('recipe-editor-modal').classList.remove('hidden');
+      const scrollBody = document.getElementById('recipe-editor-body');
+      if (scrollBody) scrollBody.scrollTop = 0;
+    }
+
+    function closeRecipeEditor() {
+      document.getElementById('recipe-editor-modal').classList.add('hidden');
+      editingRecipeId = null;
+    }
+
+    function setEditorPhotoState(photoDataOrUrl) {
+      editorPhotoState = photoDataOrUrl || '';
+      const img = document.getElementById('editor-photo-preview');
+      const placeholder = document.getElementById('editor-photo-placeholder');
+      const removeBtn = document.getElementById('btn-remove-drink-photo');
+
+      if (editorPhotoState) {
+        img.src = editorPhotoState;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        removeBtn.classList.remove('hidden');
+      } else {
+        img.src = '';
+        img.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+        removeBtn.classList.add('hidden');
+      }
+    }
+
+    function clearEditorPhoto() {
+      setEditorPhotoState('');
+      document.getElementById('edit-drink-photo-url').value = '';
+      document.getElementById('edit-drink-photo-file').value = '';
+    }
+
+    function handleEditorPhotoUrlInput(val) {
+      setEditorPhotoState(val.trim());
+    }
+
+    function handleEditorPhotoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const maxDim = 900;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+          setEditorPhotoState(compressedDataUrl);
+          document.getElementById('edit-drink-photo-url').value = '';
+          showToast('Photo attached & optimized', 'success');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderEditorIngredientRows() {
+      const container = document.getElementById('editor-ingredients-container');
+      container.innerHTML = editorIngredientRows.map((row, idx) => `
+        <div class="flex items-center gap-2">
+          <select
+            onchange="editorIngredientRows[${idx}].id = this.value"
+            class="flex-1 px-3 py-2 rounded-xl bg-[#191919] border border-white/15 text-xs text-white focus:outline-none focus:border-[#40C4C6]"
+          >
+            ${ingredients.map((ing) => `<option value="${ing.id}" ${row.id === ing.id ? 'selected' : ''}>${escapeHtml(ing.name)}</option>`).join('')}
+          </select>
+          <input
+            type="number"
+            step="0.1"
+            min="0.1"
+            value="${row.amount}"
+            onchange="editorIngredientRows[${idx}].amount = parseFloat(this.value) || 0.5"
+            class="w-20 px-2.5 py-2 rounded-xl bg-[#191919] border border-white/15 text-xs text-white text-center font-bold focus:outline-none focus:border-[#40C4C6]"
+          />
+          <button
+            type="button"
+            onclick="removeEditorIngredientRow(${idx})"
+            class="p-2 rounded-xl bg-red-500/15 hover:bg-red-500/30 text-red-300 text-xs font-bold transition"
+          >
+            ✕
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function addEditorIngredientRow() {
+      editorIngredientRows.push({ id: ingredients[0]?.id || 'ing_gin', amount: 2 });
+      renderEditorIngredientRows();
+    }
+
+    function removeEditorIngredientRow(idx) {
+      editorIngredientRows.splice(idx, 1);
+      renderEditorIngredientRows();
+    }
+
+    function renderEditorGarnishButtons() {
+      const container = document.getElementById('editor-garnishes-container');
+      container.innerHTML = garnishes.map((g) => {
+        const selected = editorSelectedGarnishes.includes(g.id);
+        return `
+          <button
+            type="button"
+            onclick="toggleEditorGarnish('${g.id}')"
+            class="px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
+              selected
+                ? 'bg-[#40C4C6] border-[#40C4C6] text-[#242424]'
+                : 'bg-[#191919] border-white/15 text-white/75 hover:text-white'
+            }"
+          >
+            ${escapeHtml(g.emoji)} ${escapeHtml(g.name)}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleEditorGarnish(garnishId) {
+      const idx = editorSelectedGarnishes.indexOf(garnishId);
+      if (idx >= 0) {
+        editorSelectedGarnishes.splice(idx, 1);
+      } else {
+        editorSelectedGarnishes.push(garnishId);
+      }
+      renderEditorGarnishButtons();
+    }
+
+    function saveEditedRecipe() {
+      if (!isAdminUnlocked) return;
+      const name = document.getElementById('edit-drink-name').value.trim();
+      if (!name) {
+        showToast('Please enter a cocktail name', 'error');
+        return;
+      }
+
+      const payload = {
+        id: editingRecipeId || ('rec_' + Date.now()),
+        name,
+        folder: document.getElementById('edit-drink-folder').value,
+        photo: editorPhotoState || '',
+        glass: document.getElementById('edit-drink-glass').value,
+        ice: document.getElementById('edit-drink-ice').value,
+        technique: document.getElementById('edit-drink-technique').value,
+        ingredients: editorIngredientRows.filter((r) => r.id && r.amount > 0),
+        garnishes: [...editorSelectedGarnishes],
+        instructions: document.getElementById('edit-drink-instructions').value.trim()
+      };
+
+      const existingIdx = recipes.findIndex((r) => r.id === payload.id);
+      if (existingIdx >= 0) {
+        recipes[existingIdx] = payload;
+      } else {
+        recipes.push(payload);
+      }
+
+      if (currentOrder && currentOrder.id === payload.id) {
+        currentOrder = JSON.parse(JSON.stringify(payload));
+        renderOrderSpecCard();
+      }
+
+      pushCatalogToCloud();
+      closeRecipeEditor();
+      refreshActiveCodexTab();
+      showToast(`Saved "${name}"`, 'success');
+    }
+
+    function deleteEditedRecipe() {
+      if (!isAdminUnlocked || !editingRecipeId) return;
+      const target = recipes.find((r) => r.id === editingRecipeId);
+      openConfirmModal(
+        'Delete Recipe',
+        `Are you sure you want to permanently remove "${target ? target.name : 'this recipe'}"?`,
+        () => {
+          recipes = recipes.filter((r) => r.id !== editingRecipeId);
+          pushCatalogToCloud();
+          closeRecipeEditor();
+          refreshActiveCodexTab();
+          showToast('Recipe deleted');
+        }
+      );
+    }
+
+    // =========================================================================
+    // 11. ADMIN-PROTECTED INGREDIENTS & GARNISHES MANAGEMENT
+    // =========================================================================
+    function renderCodexIngredients() {
+      const banner = document.getElementById('ingredients-locked-banner');
+      const addCard = document.getElementById('add-ingredient-card');
+      const hint = document.getElementById('ing-edit-hint');
+      const list = document.getElementById('admin-ingredients-list');
+
+      if (isAdminUnlocked) {
+        banner.classList.add('hidden');
+        addCard.classList.remove('hidden');
+        hint.classList.remove('hidden');
+      } else {
+        banner.classList.remove('hidden');
+        addCard.classList.add('hidden');
+        hint.classList.add('hidden');
+      }
+
+      const q = codexSearchQuery.trim().toLowerCase();
+      const filteredIngredients = q
+        ? ingredients.filter((ing) =>
+            (ing.name || '').toLowerCase().includes(q) ||
+            (ing.category || '').toLowerCase().includes(q)
+          )
+        : ingredients;
+
+      document.getElementById('ing-total-count').textContent = q
+        ? `${filteredIngredients.length} of ${ingredients.length}`
+        : String(ingredients.length);
+      updateSearchMatchBadge(filteredIngredients.length, ingredients.length);
+
+      if (filteredIngredients.length === 0) {
+        list.innerHTML = `
+          <div class="col-span-full bg-[#242424] border border-dashed border-white/15 rounded-xl p-6 text-center space-y-2">
+            <p class="text-xs font-bold text-white">No ingredients matched "${escapeHtml(codexSearchQuery.trim())}"</p>
+            <button type="button" onclick="clearCodexSearch()" class="px-3 py-1.5 rounded-lg text-xs font-extrabold bg-[#40C4C6] text-[#242424]">Clear Search</button>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = filteredIngredients.map((ing) => {
+        if (!isAdminUnlocked) {
+          return `
+            <div class="p-2.5 rounded-xl bg-[#242424] border border-white/10 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="w-3 h-3 rounded-full shrink-0" style="background-color:${escapeHtml(ing.color)}"></span>
+                <span class="text-xs font-bold text-white truncate">${escapeHtml(ing.name)}</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#191919] text-white/60 shrink-0">${escapeHtml(ing.category)}</span>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="p-2.5 rounded-xl bg-[#242424] border border-white/10 flex flex-wrap sm:flex-nowrap items-center gap-2">
+            <span class="w-3 h-3 rounded-full shrink-0" style="background-color:${escapeHtml(ing.color)}"></span>
+            <input
+              id="rename-ing-${ing.id}"
+              type="text"
+              value="${escapeHtml(ing.name)}"
+              onkeydown="if(event.key==='Enter') saveIngredientRename('${ing.id}')"
+              class="flex-1 min-w-[120px] px-2.5 py-1.5 rounded-lg bg-[#191919] border border-white/15 text-xs text-white focus:outline-none focus:border-[#40C4C6]"
+            />
+            <select
+              id="recat-ing-${ing.id}"
+              onchange="saveIngredientRename('${ing.id}')"
+              class="px-2 py-1.5 rounded-lg bg-[#191919] border border-white/15 text-[11px] font-semibold text-white/85 focus:outline-none focus:border-[#40C4C6] shrink-0"
+              title="Ingredient Category"
+            >
+              ${INGREDIENT_CATEGORIES.map((cat) => `<option value="${cat}" ${ing.category === cat ? 'selected' : ''}>${cat}</option>`).join('')}
+            </select>
+            <button
+              type="button"
+              onclick="saveIngredientRename('${ing.id}')"
+              class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition shrink-0"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onclick="deleteIngredient('${ing.id}')"
+              class="px-2 py-1.5 rounded-lg text-[11px] font-bold bg-red-500/15 hover:bg-red-500/30 text-red-300 transition shrink-0"
+            >
+              ✕
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addNewIngredient() {
+      if (!isAdminUnlocked) {
+        promptAdminPin(() => renderCodexIngredients());
+        return;
+      }
+      const nameInput = document.getElementById('new-ing-name');
+      const catInput = document.getElementById('new-ing-category');
+      const colorInput = document.getElementById('new-ing-color');
+
+      const name = nameInput.value.trim();
+      if (!name) {
+        showToast('Enter an ingredient name', 'error');
+        return;
+      }
+
+      ingredients.push({
+        id: 'ing_' + Date.now(),
+        name,
+        category: catInput.value,
+        color: colorInput.value || '#40C4C6'
+      });
+
+      nameInput.value = '';
+      pushCatalogToCloud();
+      renderCodexIngredients();
+      renderIngredientButtons();
+      showToast(`Added "${name}"`, 'success');
+    }
+
+    function saveIngredientRename(ingId) {
+      if (!isAdminUnlocked) return;
+      const input = document.getElementById(`rename-ing-${ingId}`);
+      const catSelect = document.getElementById(`recat-ing-${ingId}`);
+      if (!input) return;
+      const newName = input.value.trim();
+      if (!newName) return;
+
+      const target = ingredients.find((i) => i.id === ingId);
+      if (target) {
+        target.name = newName;
+        if (catSelect && catSelect.value) {
+          target.category = catSelect.value;
+        }
+        pushCatalogToCloud();
+        renderIngredientButtons();
+        renderOrderSpecCard();
+        showToast('Ingredient updated', 'success');
+      }
+    }
+
+    function deleteIngredient(ingId) {
+      if (!isAdminUnlocked) return;
+      ingredients = ingredients.filter((i) => i.id !== ingId);
+      pushCatalogToCloud();
+      renderCodexIngredients();
+      renderIngredientButtons();
+      showToast('Ingredient removed');
+    }
+
+    function renderCodexGarnishes() {
+      const banner = document.getElementById('garnishes-locked-banner');
+      const addCard = document.getElementById('add-garnish-card');
+      const list = document.getElementById('admin-garnishes-list');
+
+      if (isAdminUnlocked) {
+        banner.classList.add('hidden');
+        addCard.classList.remove('hidden');
+      } else {
+        banner.classList.remove('hidden');
+        addCard.classList.add('hidden');
+      }
+
+      const q = codexSearchQuery.trim().toLowerCase();
+      const filteredGarnishes = q
+        ? garnishes.filter((g) =>
+            (g.name || '').toLowerCase().includes(q) ||
+            (g.emoji || '').toLowerCase().includes(q)
+          )
+        : garnishes;
+
+      const countEl = document.getElementById('gar-total-count');
+      if (countEl) {
+        countEl.textContent = q ? `${filteredGarnishes.length} of ${garnishes.length}` : String(garnishes.length);
+      }
+      updateSearchMatchBadge(filteredGarnishes.length, garnishes.length);
+
+      if (filteredGarnishes.length === 0) {
+        list.innerHTML = `
+          <div class="col-span-full bg-[#242424] border border-dashed border-white/15 rounded-xl p-6 text-center space-y-2">
+            <p class="text-xs font-bold text-white">No garnishes matched "${escapeHtml(codexSearchQuery.trim())}"</p>
+            <button type="button" onclick="clearCodexSearch()" class="px-3 py-1.5 rounded-lg text-xs font-extrabold bg-[#40C4C6] text-[#242424]">Clear Search</button>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = filteredGarnishes.map((g) => {
+        if (!isAdminUnlocked) {
+          return `
+            <div class="p-2.5 rounded-xl bg-[#242424] border border-white/10 flex items-center gap-2.5">
+              <span class="text-base">${escapeHtml(g.emoji)}</span>
+              <span class="text-xs font-bold text-white">${escapeHtml(g.name)}</span>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="p-2.5 rounded-xl bg-[#242424] border border-white/10 flex items-center gap-2">
+            <input
+              id="edit-gar-emoji-${g.id}"
+              type="text"
+              maxlength="4"
+              value="${escapeHtml(g.emoji)}"
+              class="w-11 px-1.5 py-1.5 rounded-lg bg-[#191919] border border-white/15 text-xs text-white text-center"
+            />
+            <input
+              id="edit-gar-name-${g.id}"
+              type="text"
+              value="${escapeHtml(g.name)}"
+              onkeydown="if(event.key==='Enter') saveGarnishEdit('${g.id}')"
+              class="flex-1 min-w-0 px-2.5 py-1.5 rounded-lg bg-[#191919] border border-white/15 text-xs text-white focus:outline-none focus:border-[#40C4C6]"
+            />
+            <button
+              type="button"
+              onclick="saveGarnishEdit('${g.id}')"
+              class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-[#40C4C6] hover:bg-[#32a3a5] text-[#242424] transition shrink-0"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onclick="deleteGarnish('${g.id}')"
+              class="px-2 py-1.5 rounded-lg text-[11px] font-bold bg-red-500/15 hover:bg-red-500/30 text-red-300 transition shrink-0"
+            >
+              ✕
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addNewGarnish() {
+      if (!isAdminUnlocked) {
+        promptAdminPin(() => renderCodexGarnishes());
+        return;
+      }
+      const emojiInput = document.getElementById('new-garnish-emoji');
+      const nameInput = document.getElementById('new-garnish-name');
+      const name = nameInput.value.trim();
+      if (!name) {
+        showToast('Enter a garnish name', 'error');
+        return;
+      }
+
+      garnishes.push({
+        id: 'gar_' + Date.now(),
+        emoji: emojiInput.value.trim() || '🍋',
+        name
+      });
+
+      nameInput.value = '';
+      pushCatalogToCloud();
+      renderCodexGarnishes();
+      renderGarnishOptions();
+      showToast(`Added "${name}"`, 'success');
+    }
+
+    function saveGarnishEdit(garId) {
+      if (!isAdminUnlocked) return;
+      const emojiEl = document.getElementById(`edit-gar-emoji-${garId}`);
+      const nameEl = document.getElementById(`edit-gar-name-${garId}`);
+      if (!emojiEl || !nameEl) return;
+
+      const target = garnishes.find((g) => g.id === garId);
+      if (target && nameEl.value.trim()) {
+        target.emoji = emojiEl.value.trim() || '🍋';
+        target.name = nameEl.value.trim();
+        pushCatalogToCloud();
+        renderCodexGarnishes();
+        renderGarnishOptions();
+        renderOrderSpecCard();
+        showToast('Garnish updated', 'success');
+      }
+    }
+
+    function deleteGarnish(garId) {
+      if (!isAdminUnlocked) return;
+      garnishes = garnishes.filter((g) => g.id !== garId);
+      pushCatalogToCloud();
+      renderCodexGarnishes();
+      renderGarnishOptions();
+      showToast('Garnish removed');
+    }
+
+    // =========================================================================
+    // 12. EXPORT / IMPORT JSON BACKUPS, FULLSCREEN PHOTO & CONFIRM DIALOGS
+    // =========================================================================
+    function exportBarDataBackup() {
+      try {
+        const backupObj = {
+          app: 'The Cloud Lounge School',
+          exportedAt: new Date().toISOString(),
+          recipes,
+          ingredients,
+          garnishes
+        };
+        const blob = new Blob([JSON.stringify(backupObj, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CloudLounge_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast('Backup JSON exported', 'success');
+      } catch (err) {
+        showToast('Failed to export backup', 'error');
+      }
+    }
+
+    function triggerImportBackup() {
+      const openPicker = () => {
+        const input = document.getElementById('codex-import-file-input');
+        if (input) {
+          input.value = '';
+          input.click();
+        }
+      };
+
+      if (!isAdminUnlocked) {
+        promptAdminPin(openPicker);
+      } else {
+        openPicker();
+      }
+    }
+
+    function importBarDataBackup(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (!parsed || !Array.isArray(parsed.recipes)) {
+            showToast('Invalid backup file format', 'error');
+            return;
+          }
+          recipes = normalizeRecipesList(parsed.recipes);
+          if (Array.isArray(parsed.ingredients) && parsed.ingredients.length > 0) {
+            ingredients = parsed.ingredients;
+          }
+          if (Array.isArray(parsed.garnishes) && parsed.garnishes.length > 0) {
+            garnishes = parsed.garnishes;
+          }
+          pushCatalogToCloud();
+          refreshActiveCodexTab();
+          renderWorkstationControls();
+          startNewOrder();
+          showToast('Backup restored successfully!', 'success');
+        } catch (err) {
+          showToast('Could not parse backup JSON', 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function openConfirmModal(title, message, onConfirm) {
+      pendingConfirmCallback = onConfirm;
+      document.getElementById('confirm-title').textContent = title;
+      document.getElementById('confirm-message').textContent = message;
+      const yesBtn = document.getElementById('confirm-yes-btn');
+      yesBtn.onclick = function () {
+        closeConfirmModal();
+        if (typeof pendingConfirmCallback === 'function') {
+          const cb = pendingConfirmCallback;
+          pendingConfirmCallback = null;
+          cb();
+        }
+      };
+      document.getElementById('confirm-modal').classList.remove('hidden');
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('confirm-modal').classList.add('hidden');
+    }
+
+    function openFullscreenPhoto(src, title) {
+      if (!src) return;
+      document.getElementById('photo-lightbox-img').src = src;
+      document.getElementById('photo-lightbox-title').textContent = title || 'Cocktail Photo';
+      document.getElementById('photo-lightbox-modal').classList.remove('hidden');
+    }
+
+    function closeFullscreenPhoto() {
+      document.getElementById('photo-lightbox-modal').classList.add('hidden');
+      document.getElementById('photo-lightbox-img').src = '';
+    }
+
+    // =========================================================================
+    // 13. TOUCH GESTURES, GLOBAL EXPORTS & BOOTSTRAP
+    // =========================================================================
+    function initTabletTouchGestures() {
+      const panel = document.getElementById('workstation-panel-card');
+      if (!panel) return;
+      let startX = 0;
+      let startY = 0;
+
+      panel.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      panel.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length === 1) {
+          const dx = e.changedTouches[0].clientX - startX;
+          const dy = e.changedTouches[0].clientY - startY;
+          if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            if (dx < 0 && activeStep < 5) changeStep(1);
+            if (dx > 0 && activeStep > 1) changeStep(-1);
+          }
+        }
+      }, { passive: true });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeFullscreenPhoto();
+          closeConfirmModal();
+          closePinModal();
+        }
+      });
+    }
+
+    Object.assign(window, {
+      toggleGameMode,
+      setPracticeFolderFilter,
+      skipToNextOrder,
+      togglePeekRecipe,
+      setActiveStep,
+      changeStep,
+      selectGlass,
+      selectIce,
+      togglePourMode,
+      selectJiggerVolume,
+      setIngredientCategory,
+      pourIngredient,
+      undoLastPour,
+      resetCurrentBuild,
+      selectTechnique,
+      toggleBuildGarnish,
+      serveCocktail,
+      retryCurrentOrder,
+      closeEvalAndNextOrder,
+      openCodexModal,
+      closeCodexModal,
+      handleCodexSearch,
+      clearCodexSearch,
+      handleAdminToggle,
+      promptAdminPin,
+      closePinModal,
+      verifyAdminPin,
+      setCodexTab,
+      setCodexFolder,
+      handleEditRecipeClick,
+      openAddRecipeModal,
+      openRecipeEditor,
+      closeRecipeEditor,
+      clearEditorPhoto,
+      handleEditorPhotoUrlInput,
+      handleEditorPhotoUpload,
+      addEditorIngredientRow,
+      removeEditorIngredientRow,
+      toggleEditorGarnish,
+      saveEditedRecipe,
+      deleteEditedRecipe,
+      practiceSpecificRecipe,
+      addNewIngredient,
+      saveIngredientRename,
+      deleteIngredient,
+      addNewGarnish,
+      saveGarnishEdit,
+      deleteGarnish,
+      exportBarDataBackup,
+      triggerImportBackup,
+      importBarDataBackup,
+      closeConfirmModal,
+      openFullscreenPhoto,
+      closeFullscreenPhoto
+    });
+
+    window.onload = async function () {
+      await initCloudSync();
+      renderWorkstationControls();
+      startNewOrder();
+      initTabletTouchGestures();
+    };
+  </script>
+</body>
+</html>
